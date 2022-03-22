@@ -6,8 +6,8 @@ export interface ClobContracts {
 }
 
 export const MUMBAI_CONTRACTS : ClobContracts = {
-    Exchange: "0xA6227994182d87680a8d66F41ad7E3a56130858E",
-    Executor: "0x859876dD2683Df7AdBd8B8623Ce7F57Ea01f85Ad",
+    Exchange: "0x3AA27F87CA17822f305A9788e7b9f5ea43A531FF",
+    Executor: "0x1199443D6806dE23a9C976193F07A381542F81df",
     Collateral: "0x2E8DCfE708D44ae2e406a1c02DFE2Fa13012f961",
     Conditional: "0x7D8610E9567d2a6C9FBf66a5A13E9Ba8bb120d43"
 }
