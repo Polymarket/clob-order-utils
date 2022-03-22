@@ -3,6 +3,8 @@ export enum SignatureType {
 
     CONTRACT,
     
-    POLY_PROXY
+    POLY_PROXY,
+
+    POLY_GNOSIS_SAFE,
 }
 

@@ -5,13 +5,6 @@ export interface ClobContracts {
     Conditional: string;
 }
 
-export const KOVAN_CONTRACTS : ClobContracts = {
-    Exchange: "0xE7819d9745e64c14541732ca07CC3898670b7650",
-    Executor: "0x382E8f6a8404eB11aaFd9A5a0B11aa5A24e0830B",
-    Collateral: "0xe22da380ee6B445bb8273C81944ADEB6E8450422",
-    Conditional: "",
-}
-
 export const MUMBAI_CONTRACTS : ClobContracts = {
     Exchange: "0xA6227994182d87680a8d66F41ad7E3a56130858E",
     Executor: "0x859876dD2683Df7AdBd8B8623Ce7F57Ea01f85Ad",
@@ -28,8 +21,6 @@ export const MATIC_CONTRACTS: ClobContracts = {
 
 export const getContracts = (chainID: number): ClobContracts => {
     switch (chainID) {
-        case 42:
-            return KOVAN_CONTRACTS;
         case 137:
             return MATIC_CONTRACTS;
         case 80001:
