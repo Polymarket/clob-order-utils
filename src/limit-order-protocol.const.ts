@@ -1,6 +1,5 @@
 import {AbiItem} from './model/abi.model';
 import LimitOrderProtocolABISource from './abi/LimitOrderProtocol.json';
-import ExecutorV2ABISource from './abi/OrderExecutorV2.json';
 import ERC1155ABISource from './abi/ERC1155ABI.json';
 import ERC20ABISource from './abi/ERC20ABI.json';
 
@@ -15,8 +14,6 @@ export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 export const CALL_RESULTS_PREFIX = 'CALL_RESULTS_';
 
 export const LIMIT_ORDER_PROTOCOL_ABI: AbiItem[] = LimitOrderProtocolABISource;
-
-export const EXECUTOR_ABI: AbiItem[] = ExecutorV2ABISource;
 
 export const ERC1155_ABI: AbiItem[] = ERC1155ABISource;
 
