@@ -83,6 +83,7 @@ export interface MarketOrderAndSignature {
     order: MarketOrder;
     signature: MarketOrderSignature;
     orderType: OrderType;
+    minAmountReceived?: number;
 }
 
 export enum LimitOrderProtocolMethods {
