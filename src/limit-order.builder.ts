@@ -105,9 +105,7 @@ export class LimitOrderBuilder {
         nonce,
         signer,
         sigType,
-        predicate = ZX,
-        permit = ZX,
-        interaction = ZX,
+        predicate = ZX
     }: LimitOrderData): LimitOrder {
         let makerAssetData;
         let makerAsset;
@@ -187,8 +185,6 @@ export class LimitOrderBuilder {
                 takerAmount
             ),
             predicate,
-            permit,
-            interaction,
             signer,
             sigType
         };

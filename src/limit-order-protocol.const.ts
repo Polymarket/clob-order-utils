@@ -3,7 +3,7 @@ import LimitOrderProtocolABISource from './abi/LimitOrderProtocol.json';
 import ERC1155ABISource from './abi/ERC1155ABI.json';
 import ERC20ABISource from './abi/ERC20ABI.json';
 
-export const PROTOCOL_NAME = '1inch Limit Order Protocol';
+export const PROTOCOL_NAME = 'Polymarket Limit Order Protocol';
 
 export const PROTOCOL_VERSION = '1';
 
@@ -35,8 +35,6 @@ export const ORDER_STRUCTURE = [
     {name: 'getMakerAmount', type: 'bytes'},
     {name: 'getTakerAmount', type: 'bytes'},
     {name: 'predicate', type: 'bytes'},
-    {name: 'permit', type: 'bytes'},
-    {name: 'interaction', type: 'bytes'},
     {name: 'signer', type: 'address'},
     {name: 'sigType', type: 'uint256'},
 ];

@@ -1,7 +1,7 @@
 {
     "name": "@polymarket/order-utils",
-    "version": "1.2.10",
-    "description": "Typescript utility for creating limit orders for Polymarket's CLOB",
+    "version": "1.2.11",
+    "description": "Typescript utility for creating orders for Polymarket's CLOB",
     "author": "Liam Kovatch <liam@polymarket.com>",
     "homepage": "https://github.com/Polymarket/clob-order-utils",
     "license": "MIT",

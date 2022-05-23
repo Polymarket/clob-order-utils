@@ -1,6 +1,5 @@
 import {
     LIMIT_ORDER_PROTOCOL_ABI,
-    CALL_RESULTS_PREFIX,
     ZX,
 } from './limit-order-protocol.const';
 import {
@@ -126,33 +125,9 @@ export class LimitOrderProtocolFacade {
             });
     }
 
-    simulateCalls(tokens: string[], data: unknown[]): Promise<boolean> {
-        const callData = this.getContractCallData(
-            LimitOrderProtocolMethods.simulateCalls,
-            [tokens, data]
-        );
-
-        return this.providerConnector
-            .ethCall(this.contractAddress, callData)
-            .then((result) => {
-                const parsed = this.parseSimulateTransferResponse(result);
-
-                if (parsed !== null) return parsed;
-
-                return Promise.reject(result);
-            })
-            .catch((error) => {
-                const parsed = this.parseSimulateTransferError(error);
-
-                if (parsed !== null) return parsed;
-
-                return Promise.reject(error);
-            });
-    }
-
     domainSeparator(): Promise<string> {
         const callData = this.getContractCallData(
-            LimitOrderProtocolMethods.DOMAIN_SEPARATOR
+            LimitOrderProtocolMethods.domainSeparator
         );
 
         return this.providerConnector.ethCall(this.contractAddress, callData);
@@ -178,46 +153,10 @@ export class LimitOrderProtocolFacade {
         return null;
     }
 
-    parseSimulateTransferResponse(response: string): boolean | null {
-        const parsed = this.parseContractResponse(response);
-
-        if (parsed.startsWith(CALL_RESULTS_PREFIX)) {
-            const data = parsed.replace(CALL_RESULTS_PREFIX, '');
-
-            return !data.includes('0');
-        }
-
-        return null;
-    }
-
-    parseSimulateTransferError(error: Error | string): boolean | null {
-        const message = this.stringifyError(error);
-        const regex = new RegExp('(' + CALL_RESULTS_PREFIX + '\\d+)');
-        const match = message.match(regex);
-
-        if (match) {
-            return !match[0].includes('0');
-        }
-
-        return null;
-    }
-
     parseContractResponse(response: string): string {
         return this.providerConnector.decodeABIParameter<string>(
             'string',
             ZX + response.slice(10)
         );
-    }
-
-    private stringifyError(error: Error | string | unknown): string {
-        if (typeof error === 'string') {
-            return error;
-        }
-
-        if (error instanceof Error) {
-            return error.toString();
-        }
-
-        return JSON.stringify(error);
     }
 }
