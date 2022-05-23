@@ -20,8 +20,6 @@ export interface LimitOrderData {
     expiry?: number;
     nonce?: number;
     predicate?: string;
-    permit?: string;
-    interaction?: string;
 }
 
 export interface LimitOrder extends EIP712Object {
@@ -33,8 +31,6 @@ export interface LimitOrder extends EIP712Object {
     getMakerAmount: string;
     getTakerAmount: string;
     predicate: string;
-    permit: string;
-    interaction: string;
     signer: string;
     sigType: SignatureType;
 }
@@ -105,7 +101,6 @@ export enum LimitOrderProtocolMethods {
     transferFrom = "transferFrom",
     checkPredicate = "checkPredicate",
     remainingsRaw = "remainingsRaw",
-    simulateCalls = "simulateCalls",
-    DOMAIN_SEPARATOR = "DOMAIN_SEPARATOR",
+    domainSeparator = "domainSeparator",
     batchFillOrders = "batchFillOrders",
 }
