@@ -1,5 +1,5 @@
 import {AbiItem} from './model/abi.model';
-import LimitOrderProtocolABISource from './abi/LimitOrderProtocol.json';
+import LimitOrderProtocolABISource from './abi/PolyLimitOrderProtocol.json';
 import ERC1155ABISource from './abi/ERC1155ABI.json';
 import ERC20ABISource from './abi/ERC20ABI.json';
 
