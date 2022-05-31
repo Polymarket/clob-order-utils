@@ -13,10 +13,10 @@ export const MUMBAI_CONTRACTS : ClobContracts = {
 }
 
 export const MATIC_CONTRACTS: ClobContracts = {
-    Exchange: "", // TODO 
-    Executor: "",
+    Exchange: "0x6D486b31b5c0f724828Aff07c88606b213B0D196",
+    Executor: "0x6b0ab7A1E65ea6AE9072f6c45B4261ACDfB30827",
     Collateral: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
-    Conditional: "",
+    Conditional: "0x4D97DCd97eC945f40cF65F87097ACe5EA0476045",
 }
 
 export const getContracts = (chainID: number): ClobContracts => {
