@@ -9,7 +9,7 @@ export class EthersProviderConnector implements ProviderConnector {
 
     contractEncodeABI(
         abi: AbiItem[],
-        address: string | null,
+        _address: string | null,
         methodName: string,
         methodParams: unknown[]
     ): string {

@@ -4,3 +4,4 @@ coverage
 jest.config.ts
 .eslintrc.js
 test
+src/model/ierc1155.ts
