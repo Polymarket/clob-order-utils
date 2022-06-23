@@ -74,7 +74,7 @@ export interface LimitOrderAndSignature {
     orderType: OrderType;
 }
 
-export type TimeInFoce = "FOK" | "IOC"
+export type TimeInForce = "FOK" | "IOC"
 
 // Standard MarketOrder object to be used as entry points for Market orders in the CLOB
 export interface MarketOrderAndSignature {
@@ -82,7 +82,7 @@ export interface MarketOrderAndSignature {
     signature: MarketOrderSignature;
     orderType: OrderType;
     minAmountReceived?: string; // Optional slippage protection field
-    timeInForce?: TimeInFoce; // Optional market order type: FOK (fill or kill) / IOC (immediate or cancel)
+    timeInForce?: TimeInForce; // Optional market order type: FOK (fill or kill) / IOC (immediate or cancel)
 }
 
 export enum LimitOrderProtocolMethods {
