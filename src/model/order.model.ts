@@ -1,5 +1,5 @@
-import { SignatureType } from "../signature-types";
-import { EIP712Object } from "./eip712.model";
+import {SignatureType} from '../signature-types';
+import {EIP712Object} from './eip712.model';
 
 export type LimitOrderSignature = string;
 
@@ -15,7 +15,7 @@ export interface LimitOrderData {
     takerAssetID?: string;
     makerAmount: string;
     takerAmount: string;
-    signer?: string // Address performing the signing
+    signer?: string; // Address performing the signing
     sigType?: SignatureType; // Signature scheme being used
     expiry?: number;
     nonce?: number;
@@ -66,7 +66,6 @@ export interface MarketOrder extends EIP712Object {
 
 export type OrderType = string;
 
-
 // Standard LimitOrder object to be used as the entry point in the CLOB
 export interface LimitOrderAndSignature {
     order: LimitOrder;
@@ -74,7 +73,7 @@ export interface LimitOrderAndSignature {
     orderType: OrderType;
 }
 
-export type TimeInForce = "FOK" | "IOC"
+export type TimeInForce = 'FOK' | 'IOC';
 
 // Standard MarketOrder object to be used as entry points for Market orders in the CLOB
 export interface MarketOrderAndSignature {
@@ -82,28 +81,29 @@ export interface MarketOrderAndSignature {
     signature: MarketOrderSignature;
     orderType: OrderType;
     minAmountReceived?: string; // Optional slippage protection field
-    timeInForce?: TimeInForce; // Optional market order type: FOK (fill or kill) / IOC (immediate or cancel)
+    // Optional market order type: FOK (fill or kill) / IOC (immediate or cancel)
+    timeInForce?: TimeInForce;
 }
 
 export enum LimitOrderProtocolMethods {
-    getMakerAmount = "getMakerAmount",
-    getTakerAmount = "getTakerAmount",
-    fillOrder = "fillOrder",
-    cancelOrder = "cancelOrder",
-    nonce = "nonce",
-    advanceNonce = "advanceNonce",
-    increaseNonce = "increaseNonce",
-    and = "and",
-    or = "or",
-    eq = "eq",
-    lt = "lt",
-    gt = "gt",
-    timestampBelow = "timestampBelow",
-    nonceEquals = "nonceEquals",
-    remaining = "remaining",
-    transferFrom = "transferFrom",
-    checkPredicate = "checkPredicate",
-    remainingsRaw = "remainingsRaw",
-    domainSeparator = "domainSeparator",
-    batchFillOrders = "batchFillOrders",
+    getMakerAmount = 'getMakerAmount',
+    getTakerAmount = 'getTakerAmount',
+    fillOrder = 'fillOrder',
+    cancelOrder = 'cancelOrder',
+    nonce = 'nonce',
+    advanceNonce = 'advanceNonce',
+    increaseNonce = 'increaseNonce',
+    and = 'and',
+    or = 'or',
+    eq = 'eq',
+    lt = 'lt',
+    gt = 'gt',
+    timestampBelow = 'timestampBelow',
+    nonceEquals = 'nonceEquals',
+    remaining = 'remaining',
+    transferFrom = 'transferFrom',
+    checkPredicate = 'checkPredicate',
+    remainingsRaw = 'remainingsRaw',
+    domainSeparator = 'domainSeparator',
+    batchFillOrders = 'batchFillOrders',
 }
