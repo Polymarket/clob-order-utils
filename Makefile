@@ -4,14 +4,12 @@ build:
 	rm -rf dist
 	tsc --module commonjs
 
-
 .PHONY: test
 test:
 	yarn nyc -a \
 		--reporter=html \
 		--reporter=text mocha './test' \
 		--require esm \
-		--require isomorphic-fetch \
 		--require jsdom-global/register \
 		--require ts-node/register 'test/**/*.test.ts' \
 		--require tsconfig-paths/register \
@@ -21,4 +19,4 @@ test:
 .PHONY: lint
 lint:
 	@echo "Linting code..."
-	eslint ./src --ext .js,.ts
+	./node_modules/.bin/eslint ./src --ext .js,.ts
