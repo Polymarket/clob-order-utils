@@ -26,6 +26,12 @@ export class CTFExchangeOrderBuilder {
         private readonly generateSalt = generateOrderSalt
     ) {}
 
+    /**
+     * build an order object including the signature.
+     * @param walletAddress
+     * @param orderData
+     * @returns a SignedOrder object (order + signature)
+     */
     async buildSignedOrder(
         walletAddress: string,
         orderData: OrderData
@@ -43,6 +49,11 @@ export class CTFExchangeOrderBuilder {
         } as SignedOrder;
     }
 
+    /**
+     * Creates an Order object from order data.
+     * @param OrderData
+     * @returns a Order object (not signed)
+     */
     buildOrder({
         makerAddress,
         makerAssetId,
@@ -91,6 +102,11 @@ export class CTFExchangeOrderBuilder {
         };
     }
 
+    /**
+     * Parses an Order object to EIP712 typed data
+     * @param order
+     * @returns a EIP712TypedData object
+     */
     buildLimitOrderTypedData(order: Order): EIP712TypedData {
         return {
             primaryType: 'Order',
@@ -108,6 +124,12 @@ export class CTFExchangeOrderBuilder {
         };
     }
 
+    /**
+     * Generates order's signature from a EIP712TypedData object + the signer address
+     * @param walletAddress
+     * @param typedData
+     * @returns a OrderSignature that is an string
+     */
     buildOrderSignature(
         walletAddress: string,
         typedData: EIP712TypedData
@@ -126,6 +148,11 @@ export class CTFExchangeOrderBuilder {
         );
     }
 
+    /**
+     * Generates the hash of the order from a EIP712TypedData object.
+     * @param orderTypedData
+     * @returns a OrderHash that is an string
+     */
     buildOrderHash(orderTypedData: EIP712TypedData): OrderHash {
         const message = orderTypedData as TypedMessage<MessageTypes>;
 
