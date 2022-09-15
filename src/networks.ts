@@ -4,6 +4,7 @@ export interface ClobContracts {
     Collateral: string;
     Conditional: string;
 }
+// TODO(REC): this changes
 
 export const MUMBAI_CONTRACTS: ClobContracts = {
     Exchange: '0xA5caFCC00E8D8E9121CC18B2DF279Eab5dE43bC5',

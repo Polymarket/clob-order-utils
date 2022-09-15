@@ -2,6 +2,8 @@ import { LimitOrderProtocolMethods } from './model/order.model';
 import { ZX } from './limit-order-protocol.const';
 import { LimitOrderProtocolFacade } from './limit-order-protocol.facade';
 
+// TODO(REC): this changes
+
 export type LimitOrderPredicateCallData = string;
 
 export class LimitOrderPredicateBuilder {

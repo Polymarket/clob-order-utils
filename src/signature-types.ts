@@ -1,10 +1,10 @@
+// TODO(REC): this changes
 export enum SignatureType {
-    EOA, 
+    EOA,
 
     CONTRACT,
-    
+
     POLY_PROXY,
 
     POLY_GNOSIS_SAFE,
 }
-

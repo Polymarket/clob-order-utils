@@ -1,5 +1,7 @@
-import {SignatureType} from '../signature-types';
-import {EIP712Object} from './eip712.model';
+import { SignatureType } from '../signature-types';
+import { EIP712Object } from './eip712.model';
+
+// TODO(REC): this changes.
 
 export type LimitOrderSignature = string;
 

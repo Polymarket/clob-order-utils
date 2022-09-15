@@ -1,15 +1,14 @@
-import {
-    LIMIT_ORDER_PROTOCOL_ABI,
-    ZX,
-} from './limit-order-protocol.const';
+import { LIMIT_ORDER_PROTOCOL_ABI, ZX } from './limit-order-protocol.const';
 import {
     LimitOrder,
     LimitOrderProtocolMethods,
     LimitOrderHash,
     LimitOrderSignature,
 } from './model/order.model';
-import {ProviderConnector} from './connector/provider.connector';
-import {BigNumber} from '@ethersproject/bignumber';
+import { ProviderConnector } from './connector/provider.connector';
+import { BigNumber } from '@ethersproject/bignumber';
+
+// TODO(REC): this changes
 
 export class LimitOrderProtocolFacade {
     constructor(
@@ -40,13 +39,10 @@ export class LimitOrderProtocolFacade {
         takerAmounts: string[],
         thresholdAmounts: string[]
     ): string {
-        return this.getContractCallData(LimitOrderProtocolMethods.batchFillOrders, [
-            orders,
-            signatures,
-            makerAmounts,
-            takerAmounts,
-            thresholdAmounts,
-        ]);
+        return this.getContractCallData(
+            LimitOrderProtocolMethods.batchFillOrders,
+            [orders, signatures, makerAmounts, takerAmounts, thresholdAmounts]
+        );
     }
 
     cancelLimitOrder(order: LimitOrder): string {

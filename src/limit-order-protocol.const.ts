@@ -1,7 +1,9 @@
-import {AbiItem} from './model/abi.model';
+import { AbiItem } from './model/abi.model';
 import LimitOrderProtocolABISource from './abi/PolyLimitOrderProtocol.json';
 import ERC1155ABISource from './abi/ERC1155ABI.json';
 import ERC20ABISource from './abi/ERC20ABI.json';
+
+// TODO(REC): this changes
 
 export const PROTOCOL_NAME = 'Polymarket Limit Order Protocol';
 
@@ -20,22 +22,21 @@ export const ERC1155_ABI: AbiItem[] = ERC1155ABISource;
 export const ERC20_ABI: AbiItem[] = ERC20ABISource;
 
 export const EIP712_DOMAIN = [
-    {name: 'name', type: 'string'},
-    {name: 'version', type: 'string'},
-    {name: 'chainId', type: 'uint256'},
-    {name: 'verifyingContract', type: 'address'},
+    { name: 'name', type: 'string' },
+    { name: 'version', type: 'string' },
+    { name: 'chainId', type: 'uint256' },
+    { name: 'verifyingContract', type: 'address' },
 ];
 
 export const ORDER_STRUCTURE = [
-    {name: 'salt', type: 'uint256'},
-    {name: 'makerAsset', type: 'address'},
-    {name: 'takerAsset', type: 'address'},
-    {name: 'makerAssetData', type: 'bytes'},
-    {name: 'takerAssetData', type: 'bytes'},
-    {name: 'getMakerAmount', type: 'bytes'},
-    {name: 'getTakerAmount', type: 'bytes'},
-    {name: 'predicate', type: 'bytes'},
-    {name: 'signer', type: 'address'},
-    {name: 'sigType', type: 'uint256'},
+    { name: 'salt', type: 'uint256' },
+    { name: 'makerAsset', type: 'address' },
+    { name: 'takerAsset', type: 'address' },
+    { name: 'makerAssetData', type: 'bytes' },
+    { name: 'takerAssetData', type: 'bytes' },
+    { name: 'getMakerAmount', type: 'bytes' },
+    { name: 'getTakerAmount', type: 'bytes' },
+    { name: 'predicate', type: 'bytes' },
+    { name: 'signer', type: 'address' },
+    { name: 'sigType', type: 'uint256' },
 ];
-

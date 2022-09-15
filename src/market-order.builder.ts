@@ -4,7 +4,7 @@ import {
     EIP712_DOMAIN,
     PROTOCOL_VERSION,
     PROTOCOL_NAME,
-    ZX
+    ZX,
 } from './limit-order-protocol.const';
 import {
     MarketOrderSignature,
@@ -19,28 +19,26 @@ import { generateOrderSalt } from './utils';
 import { MARKET_ORDER_STRUCTURE } from './market-order.const';
 import { SignatureType } from './signature-types';
 
-
+// TODO(REC): this changes
 export class MarketOrderBuilder {
-    
     constructor(
         private readonly contractAddress: string,
         private readonly chainId: number,
         private readonly providerConnector: ProviderConnector,
         private readonly generateSalt = generateOrderSalt
-    ) {
-    }
+    ) {}
 
     buildOrderSignature(
         walletAddress: string,
-        typedData: EIP712TypedData):
-        Promise<MarketOrderSignature> {
+        typedData: EIP712TypedData
+    ): Promise<MarketOrderSignature> {
         const dataHash = TypedDataUtils.hashStruct(
             typedData.primaryType,
             typedData.message,
             typedData.types,
             true
         ).toString('hex');
-        
+
         return this.providerConnector.signTypedData(
             walletAddress,
             typedData,
@@ -59,7 +57,7 @@ export class MarketOrderBuilder {
             primaryType: 'MarketOrder',
             types: {
                 EIP712Domain: EIP712_DOMAIN,
-                "MarketOrder": MARKET_ORDER_STRUCTURE,
+                MarketOrder: MARKET_ORDER_STRUCTURE,
             },
             domain: {
                 name: PROTOCOL_NAME,
@@ -80,16 +78,18 @@ export class MarketOrderBuilder {
         makerAddress,
         makerAmount,
         signer,
-        sigType
+        sigType,
     }: MarketOrderData): MarketOrder {
-        const makerTokenID: string = makerAssetID !== undefined ? makerAssetID: "-1";
-        const takerTokenID: string = takerAssetID !== undefined ? takerAssetID: "-1";
-        
-        if(signer == undefined) { 
+        const makerTokenID: string =
+            makerAssetID !== undefined ? makerAssetID : '-1';
+        const takerTokenID: string =
+            takerAssetID !== undefined ? takerAssetID : '-1';
+
+        if (signer == undefined) {
             signer = makerAddress;
         }
-        
-        if(sigType == undefined) {
+
+        if (sigType == undefined) {
             // Default to EOA 712 sig type
             sigType = SignatureType.EOA;
         }
@@ -103,11 +103,11 @@ export class MarketOrderBuilder {
             makerAssetID: makerTokenID,
             takerAsset: takerAssetAddress,
             takerAssetID: takerTokenID,
-            sigType
+            sigType,
         };
     }
 
-    private normalizeTokenIDs(order: MarketOrder) : MarketOrder {
+    private normalizeTokenIDs(order: MarketOrder): MarketOrder {
         // Convert tokenIDs to 0, if -1 to adhere to unsigned int in solidity
         return {
             salt: order.salt,
@@ -115,10 +115,10 @@ export class MarketOrderBuilder {
             maker: order.maker,
             makerAsset: order.makerAsset,
             makerAmount: order.makerAmount,
-            makerAssetID: order.makerAssetID == "-1" ? "0" : order.makerAssetID,
+            makerAssetID: order.makerAssetID == '-1' ? '0' : order.makerAssetID,
             takerAsset: order.takerAsset,
-            takerAssetID: order.takerAssetID == "-1" ? "0" : order.takerAssetID,   
+            takerAssetID: order.takerAssetID == '-1' ? '0' : order.takerAssetID,
             sigType: order.sigType,
-        }
+        };
     }
 }

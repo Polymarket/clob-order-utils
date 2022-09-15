@@ -26,6 +26,7 @@ import { LimitOrderPredicateBuilder } from './limit-order-predicate.builder';
 import { generateOrderSalt } from './utils';
 import { SignatureType } from './signature-types';
 
+// TODO(REC): this changes
 
 export class LimitOrderBuilder {
     private readonly erc1155Facade: Erc1155Facade;
@@ -51,8 +52,8 @@ export class LimitOrderBuilder {
 
     buildOrderSignature(
         walletAddress: string,
-        typedData: EIP712TypedData):
-        Promise<LimitOrderSignature> {
+        typedData: EIP712TypedData
+    ): Promise<LimitOrderSignature> {
         const dataHash = TypedDataUtils.hashStruct(
             typedData.primaryType,
             typedData.message,
@@ -105,7 +106,7 @@ export class LimitOrderBuilder {
         nonce,
         signer,
         sigType,
-        predicate = ZX
+        predicate = ZX,
     }: LimitOrderData): LimitOrder {
         let makerAssetData;
         let makerAsset;
@@ -149,21 +150,21 @@ export class LimitOrderBuilder {
             );
         }
 
-        const {and, timestampBelow, nonceEquals} =
+        const { and, timestampBelow, nonceEquals } =
             this.limitOrderPredicateBuilder;
 
         if (expiry != undefined && nonce != undefined) {
             predicate = and(
                 timestampBelow(expiry),
-                nonceEquals(makerAddress, nonce), 
+                nonceEquals(makerAddress, nonce)
             );
         }
 
-        if(signer == undefined) { 
+        if (signer == undefined) {
             signer = makerAddress;
         }
-        
-        if(sigType == undefined) {
+
+        if (sigType == undefined) {
             // Default to EOA 712 sig type
             sigType = SignatureType.EOA;
         }
@@ -186,7 +187,7 @@ export class LimitOrderBuilder {
             ),
             predicate,
             signer,
-            sigType
+            sigType,
         };
     }
     /* eslint-enable max-lines-per-function */

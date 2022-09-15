@@ -2,8 +2,8 @@ import {
     ERC1155_ABI,
     LIMIT_ORDER_PROTOCOL_ABI,
 } from './limit-order-protocol.const';
-import {ProviderConnector} from './connector/provider.connector';
-import {IERC1155Interface} from './model/ierc1155';
+import { ProviderConnector } from './connector/provider.connector';
+import { IERC1155Interface } from './model/ierc1155';
 
 export enum Erc1155Methods {
     transferFrom = 'func_733NCGU',
