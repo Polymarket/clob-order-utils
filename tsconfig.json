@@ -1,6 +1,6 @@
 {
     "compileOnSave": false,
-    "include": ["src/**/*", "test/utils.test.ts"],
+    "include": ["src/**/*"],
     "exclude": [
         "src/**/*.test.ts", 
         "test/*",

@@ -26,11 +26,10 @@
     }
   ],
   "scripts": {
-    "build": "tsc --module commonjs",
-    "test": "npx jest",
-    "postbuild": "cp package.json dist && cp README.md dist",
-    "lint": "eslint ./src --ext .js,.ts",
-    "ci-pipeline": "yarn run lint && yarn run test"
+    "build": "make build",
+    "test": "make test",
+    "lint": "make lint",
+    "postbuild": "cp package.json dist && cp README.md dist"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
@@ -41,6 +40,7 @@
     "@typechain/ethers-v5": "^8.0.5",
     "@typechain/hardhat": "^3.0.0",
     "@types/jest": "^28.1.6",
+    "@types/mocha": "^9.1.1",
     "@types/prompts": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "4",
     "babel-jest": "^26.6.3",
@@ -58,16 +58,17 @@
     "istanbul-badges-readme": "^1.2.1",
     "jest": "^28.1.3",
     "lint-staged": "^10.5.4",
+    "mocha": "^10.0.0",
+    "nyc": "^15.1.0",
     "prettier": "^2.2.1",
     "standard-version": "^9.2.0",
+    "ts-jest": "^28.0.7",
     "ts-loader": "^9.0.2",
     "ts-mockito": "^2.6.1",
     "ts-node": "^9.1.1",
     "tslib": "^2.2.0",
     "typescript": "^4.2.4",
-    "web3": "^2.0.0-alpha.1",
-    "@types/mocha": "^9.1.1",
-    "ts-jest": "^28.0.7"
+    "web3": "^2.0.0-alpha.1"
   },
   "bugs": {
     "url": "https://github.com/Polymarket/clob-order-utils/issues"
