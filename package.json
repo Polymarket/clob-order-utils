@@ -31,11 +31,16 @@
     "lint": "make lint",
     "postbuild": "cp package.json dist && cp README.md dist"
   },
-  "devDependencies": {
+  "dependencies": {
     "@ethersproject/bytes": "^5.7.0",
     "@ethersproject/networks": "^5.7.1",
     "@ethersproject/providers": "^5.7.1",
     "@ethersproject/wallet": "^5.7.0",
+    "eth-sig-util": "^3.0.1",
+    "ethers": "^5.7.1",
+    "web3": "^2.0.0-alpha.1"
+  },
+  "devDependencies": {
     "@types/chai": "^4.3.3",
     "@types/mocha": "^9.1.1",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
@@ -50,8 +55,6 @@
     "eslint-plugin-promise": "^6.0.1",
     "eslint-plugin-unused-imports": "^2.0.0",
     "esm": "^3.2.25",
-    "eth-sig-util": "^3.0.1",
-    "ethers": "^5.7.1",
     "jsdom": "^20.0.0",
     "jsdom-global": "^3.0.2",
     "mocha": "^10.0.0",
@@ -61,8 +64,7 @@
     "ts-mocha": "^10.0.0",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.0",
-    "typescript": "^4.8.3",
-    "web3": "^2.0.0-alpha.1"
+    "typescript": "^4.8.3"
   },
   "bugs": {
     "url": "https://github.com/Polymarket/clob-order-utils/issues"
