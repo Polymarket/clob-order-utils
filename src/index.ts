@@ -1,5 +1,3 @@
-// TODO(REC): this changes
-
 export * from './ctf-exchange.order.builder';
 export * from './ctf-exchange.order.const';
 export * from './ctf-exchange.order.facade';

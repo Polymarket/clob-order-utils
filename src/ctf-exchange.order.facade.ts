@@ -3,7 +3,7 @@ import {
     CTFExchangeMethods,
     CTF_EXCHANGE_ABI,
 } from './ctf-exchange.order.const';
-import { Order } from './model/order.model';
+import { SignedOrder } from './model/order.model';
 
 export class CTFExchangeOrderFacade {
     constructor(
@@ -16,7 +16,7 @@ export class CTFExchangeOrderFacade {
      * @param order        - The order to be filled
      * @param fillAmount   - The amount to be filled, always in terms of the maker amount
      */
-    fillOrder(order: Order, fillAmount: string): string {
+    fillOrder(order: SignedOrder, fillAmount: string): string {
         return this.getContractCallData(CTFExchangeMethods.fillOrder, [
             order,
             fillAmount,
@@ -28,7 +28,7 @@ export class CTFExchangeOrderFacade {
      * @param orders       - The order to be filled
      * @param fillAmounts  - The amounts to be filled, always in terms of the maker amount
      */
-    fillOrders(orders: Order[], fillAmounts: string[]): string {
+    fillOrders(orders: SignedOrder[], fillAmounts: string[]): string {
         return this.getContractCallData(CTFExchangeMethods.fillOrders, [
             orders,
             fillAmounts,
@@ -45,8 +45,8 @@ export class CTFExchangeOrderFacade {
      *                           always in terms of the maker amount
      */
     matchOrders(
-        takerOrder: Order,
-        makerOrders: Order[],
+        takerOrder: SignedOrder,
+        makerOrders: SignedOrder[],
         takerFillAmount: string,
         makerFillAmounts: string[]
     ): string {
@@ -63,7 +63,7 @@ export class CTFExchangeOrderFacade {
      * An order can only be cancelled by its maker, the address which holds funds for the order
      * @oaran order - The order to be cancelled
      */
-    cancelOrder(order: Order): string {
+    cancelOrder(order: SignedOrder): string {
         return this.getContractCallData(CTFExchangeMethods.cancelOrder, [
             order,
         ]);
@@ -73,7 +73,7 @@ export class CTFExchangeOrderFacade {
      * Cancels a set of orders
      * @param orders - The set of orders to be cancelled
      */
-    cancelOrders(orders: Order[]): string {
+    cancelOrders(orders: SignedOrder[]): string {
         return this.getContractCallData(CTFExchangeMethods.cancelOrders, [
             orders,
         ]);

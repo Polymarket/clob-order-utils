@@ -37,7 +37,7 @@ export class CTFExchangeOrderBuilder {
         orderData: OrderData
     ): Promise<SignedOrder> {
         const order = this.buildOrder(orderData);
-        const orderTypedData = this.buildLimitOrderTypedData(order);
+        const orderTypedData = this.buildOrderTypedData(order);
         const orderSignature = await this.buildOrderSignature(
             walletAddress,
             orderTypedData
@@ -107,7 +107,7 @@ export class CTFExchangeOrderBuilder {
      * @param order
      * @returns a EIP712TypedData object
      */
-    buildLimitOrderTypedData(order: Order): EIP712TypedData {
+    buildOrderTypedData(order: Order): EIP712TypedData {
         return {
             primaryType: 'Order',
             types: {
