@@ -1,4 +1,8 @@
-import { TypedDataUtils, TypedMessage } from 'eth-sig-util';
+import {
+    SignTypedDataVersion,
+    TypedDataUtils,
+    TypedMessage,
+} from '@metamask/eth-sig-util';
 import { ProviderConnector } from './connector/provider.connector';
 import {
     EIP712_DOMAIN,
@@ -138,7 +142,7 @@ export class CTFExchangeOrderBuilder {
             typedData.primaryType,
             typedData.message,
             typedData.types,
-            true
+            SignTypedDataVersion.V4
         ).toString('hex');
 
         return this.providerConnector.signTypedData(
@@ -154,8 +158,14 @@ export class CTFExchangeOrderBuilder {
      * @returns a OrderHash that is an string
      */
     buildOrderHash(orderTypedData: EIP712TypedData): OrderHash {
-        const message = orderTypedData as TypedMessage<MessageTypes>;
+        const message = orderTypedData as unknown as TypedMessage<MessageTypes>;
 
-        return ZX + TypedDataUtils.sign(message).toString('hex');
+        return (
+            ZX +
+            TypedDataUtils.eip712Hash(
+                message,
+                SignTypedDataVersion.V4
+            ).toString('hex')
+        );
     }
 }

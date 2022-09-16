@@ -36,13 +36,14 @@
     "@ethersproject/networks": "^5.7.1",
     "@ethersproject/providers": "^5.7.1",
     "@ethersproject/wallet": "^5.7.0",
-    "eth-sig-util": "^3.0.1",
+    "@metamask/eth-sig-util": "^5.0.0",
     "ethers": "^5.7.1",
     "web3": "^2.0.0-alpha.1"
   },
   "devDependencies": {
     "@types/chai": "^4.3.3",
     "@types/mocha": "^9.1.1",
+    "@types/node": "^18.7.18",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "chai": "^4.3.6",
@@ -51,6 +52,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^23.0.0",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.5",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.1",
     "eslint-plugin-unused-imports": "^2.0.0",
