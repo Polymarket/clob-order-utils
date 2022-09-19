@@ -1,6 +1,6 @@
-export * from './ctf-exchange.order.builder';
-export * from './ctf-exchange.order.const';
-export * from './ctf-exchange.order.facade';
+export * from './exchange.order.builder';
+export * from './exchange.order.const';
+export * from './exchange.order.facade';
 
 export * from './connector/provider.connector';
 export * from './connector/ethers-provider.connector';

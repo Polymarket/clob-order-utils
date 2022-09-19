@@ -10,7 +10,7 @@ import {
     PROTOCOL_NAME,
     PROTOCOL_VERSION,
     ZX,
-} from './ctf-exchange.order.const';
+} from './exchange.order.const';
 import { EIP712TypedData, MessageTypes } from './model/eip712.model';
 import {
     Order,
@@ -22,7 +22,7 @@ import {
 import { SignatureType } from './model/signature-types.model';
 import { generateOrderSalt } from './utils';
 
-export class CTFExchangeOrderBuilder {
+export class ExchangeOrderBuilder {
     constructor(
         private readonly contractAddress: string,
         private readonly chainId: number,

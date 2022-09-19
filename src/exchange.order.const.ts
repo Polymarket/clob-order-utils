@@ -1,5 +1,5 @@
 import { AbiItem } from './model/abi.model';
-import CTFExchangeABISource from './abi/CTFExchange.json';
+import ExchangeABISource from './abi/Exchange.json';
 
 // Contract's constants.
 export const PROTOCOL_NAME = 'Polymarket CTF Exchange';
@@ -9,7 +9,7 @@ export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 export const CALL_RESULTS_PREFIX = 'CALL_RESULTS_';
 
 // ABIs
-export const CTF_EXCHANGE_ABI: AbiItem[] = CTFExchangeABISource;
+export const EXCHANGE_ABI: AbiItem[] = ExchangeABISource;
 
 // EIP712 Objects
 export const EIP712_DOMAIN = [
@@ -34,7 +34,7 @@ export const ORDER_STRUCTURE = [
 ];
 
 // Contract's methods
-export enum CTFExchangeMethods {
+export enum ExchangeMethods {
     fillOrder = 'fillOrder',
     fillOrders = 'fillOrders',
     matchOrders = 'matchOrders',

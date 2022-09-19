@@ -7,7 +7,7 @@ describe("getContracts", () => {
     expect(contracts).not.null;
     expect(contracts).not.undefined;
 
-    expect(contracts.CTFExchange).equal(
+    expect(contracts.Exchange).equal(
       "0x0000000000000000000000000000000000000000"
     );
     expect(contracts.Collateral).equal(
@@ -23,7 +23,7 @@ describe("getContracts", () => {
     expect(contracts).not.null;
     expect(contracts).not.undefined;
 
-    expect(contracts.CTFExchange).equal(
+    expect(contracts.Exchange).equal(
       "0x0000000000000000000000000000000000000000"
     );
     expect(contracts.Collateral).equal(

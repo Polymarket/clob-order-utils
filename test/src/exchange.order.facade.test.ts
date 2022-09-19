@@ -5,19 +5,19 @@ import { config as dotenvConfig } from "dotenv";
 import { getContracts } from "../../src/networks";
 import { EthersProviderConnector } from "../../src/connector/ethers-provider.connector";
 import { getSignerFromWallet } from "../../src/connector/provider-overload";
-import { CTFExchangeOrderFacade } from "../../src/ctf-exchange.order.facade";
-import { CTFExchangeOrderBuilder } from "../../src/ctf-exchange.order.builder";
+import { ExchangeOrderFacade } from "../../src/exchange.order.facade";
+import { ExchangeOrderBuilder } from "../../src/exchange.order.builder";
 import { generateOrderSalt } from "../../src/utils";
 import { OrderData } from "../../src/model/order.model";
 import { Side } from "../../src/model/order-side.model";
-import { ZX } from "../../src/ctf-exchange.order.const";
+import { ZX } from "../../src/exchange.order.const";
 
 dotenvConfig({ path: resolve(__dirname, "../../.env") });
 
-describe("ctf exchange order facade", () => {
+describe("exchange order facade", () => {
   let wallet: Wallet;
-  let cTFExchangeOrderFacade: CTFExchangeOrderFacade;
-  let cTFExchangeOrderBuilder: CTFExchangeOrderBuilder;
+  let exchangeOrderFacade: ExchangeOrderFacade;
+  let exchangeOrderBuilder: ExchangeOrderBuilder;
 
   beforeEach(async () => {
     const chainId = 80001;
@@ -32,13 +32,13 @@ describe("ctf exchange order facade", () => {
     const jsonRpcSigner = getSignerFromWallet(wallet, chainId, provider);
     const connector = new EthersProviderConnector(jsonRpcSigner);
 
-    cTFExchangeOrderFacade = new CTFExchangeOrderFacade(
-      contracts.CTFExchange,
+    exchangeOrderFacade = new ExchangeOrderFacade(
+      contracts.Exchange,
       connector
     );
 
-    cTFExchangeOrderBuilder = new CTFExchangeOrderBuilder(
-      contracts.CTFExchange,
+    exchangeOrderBuilder = new ExchangeOrderBuilder(
+      contracts.Exchange,
       chainId,
       connector,
       generateOrderSalt
@@ -47,7 +47,7 @@ describe("ctf exchange order facade", () => {
 
   describe("fillOrder", async () => {
     it("random salt", async () => {
-      const signedOrder = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const signedOrder = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000000",
@@ -62,7 +62,7 @@ describe("ctf exchange order facade", () => {
       expect(signedOrder).not.null;
       expect(signedOrder).not.undefined;
 
-      const fillOrderContractCallData = cTFExchangeOrderFacade.fillOrder(
+      const fillOrderContractCallData = exchangeOrderFacade.fillOrder(
         signedOrder,
         "100000000"
       );
@@ -73,11 +73,11 @@ describe("ctf exchange order facade", () => {
     });
 
     it("specific salt", async () => {
-      (cTFExchangeOrderBuilder as any)["generateSalt"] = () => {
+      (exchangeOrderBuilder as any)["generateSalt"] = () => {
         return "224417520696";
       };
 
-      const signedOrder = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const signedOrder = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000000",
@@ -92,7 +92,7 @@ describe("ctf exchange order facade", () => {
       expect(signedOrder).not.null;
       expect(signedOrder).not.undefined;
 
-      const fillOrderContractCallData = cTFExchangeOrderFacade.fillOrder(
+      const fillOrderContractCallData = exchangeOrderFacade.fillOrder(
         signedOrder,
         "100000000"
       );
@@ -110,7 +110,7 @@ describe("ctf exchange order facade", () => {
 
   describe("fillOrders", async () => {
     it("random salt", async () => {
-      const signedOrder_1 = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const signedOrder_1 = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000000",
@@ -125,7 +125,7 @@ describe("ctf exchange order facade", () => {
       expect(signedOrder_1).not.null;
       expect(signedOrder_1).not.undefined;
 
-      const signedOrder_2 = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const signedOrder_2 = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000001",
@@ -140,7 +140,7 @@ describe("ctf exchange order facade", () => {
       expect(signedOrder_1).not.null;
       expect(signedOrder_1).not.undefined;
 
-      const fillOrdersContractCallData = cTFExchangeOrderFacade.fillOrders(
+      const fillOrdersContractCallData = exchangeOrderFacade.fillOrders(
         [signedOrder_1, signedOrder_2],
         ["100000000", "50000000"]
       );
@@ -151,10 +151,10 @@ describe("ctf exchange order facade", () => {
     });
 
     it("specific salt", async () => {
-      (cTFExchangeOrderBuilder as any)["generateSalt"] = () => {
+      (exchangeOrderBuilder as any)["generateSalt"] = () => {
         return "1161141619767";
       };
-      const signedOrder_1 = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const signedOrder_1 = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000000",
@@ -169,11 +169,11 @@ describe("ctf exchange order facade", () => {
       expect(signedOrder_1).not.null;
       expect(signedOrder_1).not.undefined;
 
-      (cTFExchangeOrderBuilder as any)["generateSalt"] = () => {
+      (exchangeOrderBuilder as any)["generateSalt"] = () => {
         return "647831347297";
       };
 
-      const signedOrder_2 = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const signedOrder_2 = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000001",
@@ -188,7 +188,7 @@ describe("ctf exchange order facade", () => {
       expect(signedOrder_1).not.null;
       expect(signedOrder_1).not.undefined;
 
-      const fillOrdersContractCallData = cTFExchangeOrderFacade.fillOrders(
+      const fillOrdersContractCallData = exchangeOrderFacade.fillOrders(
         [signedOrder_1, signedOrder_2],
         ["100000000", "50000000"]
       );
@@ -205,7 +205,7 @@ describe("ctf exchange order facade", () => {
 
   describe("matchOrders", async () => {
     it("random salt", async () => {
-      const takerOrder = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const takerOrder = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000000",
@@ -220,7 +220,7 @@ describe("ctf exchange order facade", () => {
       expect(takerOrder).not.null;
       expect(takerOrder).not.undefined;
 
-      const makerOrder_1 = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const makerOrder_1 = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000001",
@@ -235,7 +235,7 @@ describe("ctf exchange order facade", () => {
       expect(makerOrder_1).not.null;
       expect(makerOrder_1).not.undefined;
 
-      const makerOrder_2 = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const makerOrder_2 = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000002",
@@ -250,7 +250,7 @@ describe("ctf exchange order facade", () => {
       expect(makerOrder_2).not.null;
       expect(makerOrder_2).not.undefined;
 
-      const matchOrdersContractCallData = cTFExchangeOrderFacade.matchOrders(
+      const matchOrdersContractCallData = exchangeOrderFacade.matchOrders(
         takerOrder,
         [makerOrder_1, makerOrder_2],
         "100000000",
@@ -263,10 +263,10 @@ describe("ctf exchange order facade", () => {
     });
 
     it("specific salt", async () => {
-      (cTFExchangeOrderBuilder as any)["generateSalt"] = () => {
+      (exchangeOrderBuilder as any)["generateSalt"] = () => {
         return "992714752899";
       };
-      const takerOrder = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const takerOrder = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000000",
@@ -281,10 +281,10 @@ describe("ctf exchange order facade", () => {
       expect(takerOrder).not.null;
       expect(takerOrder).not.undefined;
 
-      (cTFExchangeOrderBuilder as any)["generateSalt"] = () => {
+      (exchangeOrderBuilder as any)["generateSalt"] = () => {
         return "1513723728864";
       };
-      const makerOrder_1 = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const makerOrder_1 = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000001",
@@ -299,10 +299,10 @@ describe("ctf exchange order facade", () => {
       expect(makerOrder_1).not.null;
       expect(makerOrder_1).not.undefined;
 
-      (cTFExchangeOrderBuilder as any)["generateSalt"] = () => {
+      (exchangeOrderBuilder as any)["generateSalt"] = () => {
         return "1635110361894";
       };
-      const makerOrder_2 = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const makerOrder_2 = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000002",
@@ -317,7 +317,7 @@ describe("ctf exchange order facade", () => {
       expect(makerOrder_2).not.null;
       expect(makerOrder_2).not.undefined;
 
-      const matchOrdersContractCallData = cTFExchangeOrderFacade.matchOrders(
+      const matchOrdersContractCallData = exchangeOrderFacade.matchOrders(
         takerOrder,
         [makerOrder_1, makerOrder_2],
         "100000000",
@@ -336,7 +336,7 @@ describe("ctf exchange order facade", () => {
 
   describe("cancelOrder", async () => {
     it("random salt", async () => {
-      const signedOrder = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const signedOrder = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000000",
@@ -352,7 +352,7 @@ describe("ctf exchange order facade", () => {
       expect(signedOrder).not.undefined;
 
       const cancelOrderContractCallData =
-        cTFExchangeOrderFacade.cancelOrder(signedOrder);
+        exchangeOrderFacade.cancelOrder(signedOrder);
 
       expect(cancelOrderContractCallData).not.null;
       expect(cancelOrderContractCallData).not.undefined;
@@ -360,11 +360,11 @@ describe("ctf exchange order facade", () => {
     });
 
     it("specific salt", async () => {
-      (cTFExchangeOrderBuilder as any)["generateSalt"] = () => {
+      (exchangeOrderBuilder as any)["generateSalt"] = () => {
         return "880436405805";
       };
 
-      const signedOrder = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const signedOrder = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000000",
@@ -380,7 +380,7 @@ describe("ctf exchange order facade", () => {
       expect(signedOrder).not.undefined;
 
       const cancelOrderContractCallData =
-        cTFExchangeOrderFacade.cancelOrder(signedOrder);
+        exchangeOrderFacade.cancelOrder(signedOrder);
 
       expect(cancelOrderContractCallData).not.null;
       expect(cancelOrderContractCallData).not.undefined;
@@ -394,7 +394,7 @@ describe("ctf exchange order facade", () => {
 
   describe("cancelOrders", async () => {
     it("random salt", async () => {
-      const signedOrder = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const signedOrder = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000000",
@@ -409,7 +409,7 @@ describe("ctf exchange order facade", () => {
       expect(signedOrder).not.null;
       expect(signedOrder).not.undefined;
 
-      const cancelOrdersContractCallData = cTFExchangeOrderFacade.cancelOrders([
+      const cancelOrdersContractCallData = exchangeOrderFacade.cancelOrders([
         signedOrder,
       ]);
 
@@ -419,11 +419,11 @@ describe("ctf exchange order facade", () => {
     });
 
     it("specific salt", async () => {
-      (cTFExchangeOrderBuilder as any)["generateSalt"] = () => {
+      (exchangeOrderBuilder as any)["generateSalt"] = () => {
         return "880436405805";
       };
 
-      const signedOrder = await cTFExchangeOrderBuilder.buildSignedOrder(
+      const signedOrder = await exchangeOrderBuilder.buildSignedOrder(
         wallet.address,
         {
           makerAddress: "0x0000000000000000000000000000000000000000",
@@ -438,7 +438,7 @@ describe("ctf exchange order facade", () => {
       expect(signedOrder).not.null;
       expect(signedOrder).not.undefined;
 
-      const cancelOrdersContractCallData = cTFExchangeOrderFacade.cancelOrders([
+      const cancelOrdersContractCallData = exchangeOrderFacade.cancelOrders([
         signedOrder,
       ]);
 
@@ -453,7 +453,7 @@ describe("ctf exchange order facade", () => {
   });
 
   it("incrementNonce", () => {
-    const incrementNonceContractData = cTFExchangeOrderFacade.incrementNonce();
+    const incrementNonceContractData = exchangeOrderFacade.incrementNonce();
 
     expect(incrementNonceContractData).not.null;
     expect(incrementNonceContractData).not.undefined;
@@ -464,7 +464,7 @@ describe("ctf exchange order facade", () => {
   });
 
   it("isValidNonce", () => {
-    const isValidNonceContractData = cTFExchangeOrderFacade.isValidNonce(
+    const isValidNonceContractData = exchangeOrderFacade.isValidNonce(
       "0x0000000000000000000000000000000000000000",
       "100"
     );

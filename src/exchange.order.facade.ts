@@ -1,11 +1,8 @@
 import { ProviderConnector } from './connector/provider.connector';
-import {
-    CTFExchangeMethods,
-    CTF_EXCHANGE_ABI,
-} from './ctf-exchange.order.const';
+import { ExchangeMethods, EXCHANGE_ABI } from './exchange.order.const';
 import { SignedOrder } from './model/order.model';
 
-export class CTFExchangeOrderFacade {
+export class ExchangeOrderFacade {
     constructor(
         public readonly contractAddress: string,
         public readonly providerConnector: ProviderConnector
@@ -17,7 +14,7 @@ export class CTFExchangeOrderFacade {
      * @param fillAmount   - The amount to be filled, always in terms of the maker amount
      */
     fillOrder(order: SignedOrder, fillAmount: string): string {
-        return this.getContractCallData(CTFExchangeMethods.fillOrder, [
+        return this.getContractCallData(ExchangeMethods.fillOrder, [
             order,
             fillAmount,
         ]);
@@ -29,7 +26,7 @@ export class CTFExchangeOrderFacade {
      * @param fillAmounts  - The amounts to be filled, always in terms of the maker amount
      */
     fillOrders(orders: SignedOrder[], fillAmounts: string[]): string {
-        return this.getContractCallData(CTFExchangeMethods.fillOrders, [
+        return this.getContractCallData(ExchangeMethods.fillOrders, [
             orders,
             fillAmounts,
         ]);
@@ -50,7 +47,7 @@ export class CTFExchangeOrderFacade {
         takerFillAmount: string,
         makerFillAmounts: string[]
     ): string {
-        return this.getContractCallData(CTFExchangeMethods.matchOrders, [
+        return this.getContractCallData(ExchangeMethods.matchOrders, [
             takerOrder,
             makerOrders,
             takerFillAmount,
@@ -64,9 +61,7 @@ export class CTFExchangeOrderFacade {
      * @oaran order - The order to be cancelled
      */
     cancelOrder(order: SignedOrder): string {
-        return this.getContractCallData(CTFExchangeMethods.cancelOrder, [
-            order,
-        ]);
+        return this.getContractCallData(ExchangeMethods.cancelOrder, [order]);
     }
 
     /**
@@ -74,28 +69,26 @@ export class CTFExchangeOrderFacade {
      * @param orders - The set of orders to be cancelled
      */
     cancelOrders(orders: SignedOrder[]): string {
-        return this.getContractCallData(CTFExchangeMethods.cancelOrders, [
-            orders,
-        ]);
+        return this.getContractCallData(ExchangeMethods.cancelOrders, [orders]);
     }
 
     incrementNonce(): string {
-        return this.getContractCallData(CTFExchangeMethods.incrementNonce, []);
+        return this.getContractCallData(ExchangeMethods.incrementNonce, []);
     }
 
     isValidNonce(usr: string, nonce: string): string {
-        return this.getContractCallData(CTFExchangeMethods.isValidNonce, [
+        return this.getContractCallData(ExchangeMethods.isValidNonce, [
             usr,
             nonce,
         ]);
     }
 
     getContractCallData(
-        methodName: CTFExchangeMethods,
+        methodName: ExchangeMethods,
         methodParams: unknown[] = []
     ): string {
         return this.providerConnector.contractEncodeABI(
-            CTF_EXCHANGE_ABI,
+            EXCHANGE_ABI,
             this.contractAddress,
             methodName,
             methodParams
