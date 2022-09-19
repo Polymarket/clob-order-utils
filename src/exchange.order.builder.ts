@@ -1,10 +1,10 @@
-import { JsonRpcSigner } from '@ethersproject/providers';
 import {
     SignTypedDataVersion,
     TypedDataUtils,
     TypedMessage,
 } from '@metamask/eth-sig-util';
-import { Wallet } from 'ethers';
+import { JsonRpcSigner } from '@ethersproject/providers';
+import { Wallet } from '@ethersproject/wallet';
 import {
     EIP712_DOMAIN,
     ORDER_STRUCTURE,

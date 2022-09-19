@@ -1,5 +1,6 @@
 import { expect } from "chai";
-import { ethers, Wallet } from "ethers";
+import { StaticJsonRpcProvider } from "@ethersproject/providers";
+import { Wallet } from "@ethersproject/wallet";
 import { resolve } from "path";
 import { config as dotenvConfig } from "dotenv";
 import { getContracts } from "../../src/networks";
@@ -18,14 +19,14 @@ describe("exchange order builder", () => {
     const chainId = 80001;
     const contracts = getContracts(chainId);
 
-    const provider = new ethers.providers.StaticJsonRpcProvider(
+    const provider = new StaticJsonRpcProvider(
       "https://rpc-mumbai.matic.today"
     );
 
     // publicly known private key
     const privateKey =
       "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
-    wallet = new ethers.Wallet(privateKey).connect(provider);
+    wallet = new Wallet(privateKey).connect(provider);
 
     exchangeOrderBuilder = new ExchangeOrderBuilder(
       contracts.Exchange,
