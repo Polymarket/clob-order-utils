@@ -21,10 +21,13 @@ describe("exchange order builder", () => {
     const contracts = getContracts(chainId);
 
     const provider = new ethers.providers.StaticJsonRpcProvider(
-      `${process.env.RPC_URL}`
+      "https://rpc-mumbai.matic.today"
     );
 
-    wallet = new ethers.Wallet(`${process.env.PK}`).connect(provider);
+    // publicly known private key
+    const privateKey =
+      "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
+    wallet = new ethers.Wallet(privateKey).connect(provider);
 
     const jsonRpcSigner = getSignerFromWallet(wallet, chainId, provider);
     const connector = new EthersProviderConnector(jsonRpcSigner);
@@ -232,7 +235,7 @@ describe("exchange order builder", () => {
       expect(orderSignature).not.undefined;
 
       expect(orderSignature).deep.equal(
-        "0x28d2f26cdd90d3704dd86cefa020b7d7ba17a3c22467e13decaac3148b6978ef58bba831b34762f3b7696428791c78b53ccf2c47abc10127f2d67fb08cae3b801b"
+        "0x5d03542357197128ce932d72eae5d9545b74b0795a13e2c69def8eff77f7d01e26944b8288cf0136dfd05f1e9065731e2d4fea4014ce1b615f085bdfe7ded9d31b"
       );
     });
   });
@@ -344,7 +347,7 @@ describe("exchange order builder", () => {
         feeRateBps: "100",
         signatureType: 0,
         signature:
-          "0x28d2f26cdd90d3704dd86cefa020b7d7ba17a3c22467e13decaac3148b6978ef58bba831b34762f3b7696428791c78b53ccf2c47abc10127f2d67fb08cae3b801b",
+          "0x5d03542357197128ce932d72eae5d9545b74b0795a13e2c69def8eff77f7d01e26944b8288cf0136dfd05f1e9065731e2d4fea4014ce1b615f085bdfe7ded9d31b",
       });
     });
   });
