@@ -16,7 +16,7 @@ describe("exchange order builder", () => {
     const contracts = getContracts(chainId);
 
     const provider = new StaticJsonRpcProvider(
-      "https://rpc-mumbai.matic.today"
+      "https://rpc-mumbai.maticvigil.com"
     );
 
     // publicly known private key
