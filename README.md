@@ -4,7 +4,7 @@
     <img src='https://img.shields.io/npm/v/@polymarket/order-utils.svg' alt='NPM'/>
 </a>
 
-Typescript utilities used to generate and sign limit and market orders from Polymarket's CLOB
+Typescript utilities used to generate and sign orders from Polymarket's CTFExchange
 
 ### Installation
 
