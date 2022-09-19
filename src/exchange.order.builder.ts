@@ -3,7 +3,7 @@ import {
     TypedDataUtils,
     TypedMessage,
 } from '@metamask/eth-sig-util';
-import { ProviderConnector } from './connector/provider.connector';
+import { Wallet } from 'ethers';
 import {
     EIP712_DOMAIN,
     ORDER_STRUCTURE,
@@ -26,26 +26,19 @@ export class ExchangeOrderBuilder {
     constructor(
         private readonly contractAddress: string,
         private readonly chainId: number,
-        private readonly providerConnector: ProviderConnector,
+        private readonly signer: Wallet,
         private readonly generateSalt = generateOrderSalt
     ) {}
 
     /**
      * build an order object including the signature.
-     * @param walletAddress
      * @param orderData
      * @returns a SignedOrder object (order + signature)
      */
-    async buildSignedOrder(
-        walletAddress: string,
-        orderData: OrderData
-    ): Promise<SignedOrder> {
+    async buildSignedOrder(orderData: OrderData): Promise<SignedOrder> {
         const order = this.buildOrder(orderData);
         const orderTypedData = this.buildOrderTypedData(order);
-        const orderSignature = await this.buildOrderSignature(
-            walletAddress,
-            orderTypedData
-        );
+        const orderSignature = await this.buildOrderSignature(orderTypedData);
 
         return {
             ...order,
@@ -130,25 +123,15 @@ export class ExchangeOrderBuilder {
 
     /**
      * Generates order's signature from a EIP712TypedData object + the signer address
-     * @param walletAddress
      * @param typedData
      * @returns a OrderSignature that is an string
      */
-    buildOrderSignature(
-        walletAddress: string,
-        typedData: EIP712TypedData
-    ): Promise<OrderSignature> {
-        const dataHash = TypedDataUtils.hashStruct(
-            typedData.primaryType,
-            typedData.message,
+    buildOrderSignature(typedData: EIP712TypedData): Promise<OrderSignature> {
+        delete typedData.types.EIP712Domain;
+        return this.signer._signTypedData(
+            typedData.domain,
             typedData.types,
-            SignTypedDataVersion.V4
-        ).toString('hex');
-
-        return this.providerConnector.signTypedData(
-            walletAddress,
-            typedData,
-            dataHash
+            typedData.message
         );
     }
 

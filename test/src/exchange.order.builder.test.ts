@@ -3,8 +3,6 @@ import { ethers, Wallet } from "ethers";
 import { resolve } from "path";
 import { config as dotenvConfig } from "dotenv";
 import { getContracts } from "../../src/networks";
-import { EthersProviderConnector } from "../../src/connector/ethers-provider.connector";
-import { getSignerFromWallet } from "../../src/connector/provider-overload";
 import { ExchangeOrderBuilder } from "../../src/exchange.order.builder";
 import { generateOrderSalt } from "../../src/utils";
 import { Order, OrderData } from "../../src/model/order.model";
@@ -29,13 +27,10 @@ describe("exchange order builder", () => {
       "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
     wallet = new ethers.Wallet(privateKey).connect(provider);
 
-    const jsonRpcSigner = getSignerFromWallet(wallet, chainId, provider);
-    const connector = new EthersProviderConnector(jsonRpcSigner);
-
     exchangeOrderBuilder = new ExchangeOrderBuilder(
       contracts.Exchange,
       chainId,
-      connector,
+      wallet,
       generateOrderSalt
     );
   });
@@ -198,7 +193,6 @@ describe("exchange order builder", () => {
       expect(orderTypedData).not.undefined;
 
       const orderSignature = await exchangeOrderBuilder.buildOrderSignature(
-        wallet.address,
         orderTypedData
       );
       expect(orderSignature).not.null;
@@ -228,7 +222,6 @@ describe("exchange order builder", () => {
       expect(orderTypedData).not.undefined;
 
       const orderSignature = await exchangeOrderBuilder.buildOrderSignature(
-        wallet.address,
         orderTypedData
       );
       expect(orderSignature).not.null;
@@ -298,18 +291,15 @@ describe("exchange order builder", () => {
 
   describe("buildSignedOrder", async () => {
     it("random salt", async () => {
-      const signedOrder = await exchangeOrderBuilder.buildSignedOrder(
-        wallet.address,
-        {
-          makerAddress: "0x0000000000000000000000000000000000000000",
-          makerAssetId: "1234",
-          makerAmount: "100000000",
-          takerAmount: "50000000",
-          side: Side.BUY,
-          feeRateBps: "100",
-          nonce: "0",
-        } as OrderData
-      );
+      const signedOrder = await exchangeOrderBuilder.buildSignedOrder({
+        makerAddress: "0x0000000000000000000000000000000000000000",
+        makerAssetId: "1234",
+        makerAmount: "100000000",
+        takerAmount: "50000000",
+        side: Side.BUY,
+        feeRateBps: "100",
+        nonce: "0",
+      } as OrderData);
       expect(signedOrder).not.null;
       expect(signedOrder).not.undefined;
     });
@@ -319,18 +309,15 @@ describe("exchange order builder", () => {
         return "479249096354";
       };
 
-      const signedOrder = await exchangeOrderBuilder.buildSignedOrder(
-        wallet.address,
-        {
-          makerAddress: "0x0000000000000000000000000000000000000000",
-          makerAssetId: "1234",
-          makerAmount: "100000000",
-          takerAmount: "50000000",
-          side: Side.BUY,
-          feeRateBps: "100",
-          nonce: "0",
-        } as OrderData
-      );
+      const signedOrder = await exchangeOrderBuilder.buildSignedOrder({
+        makerAddress: "0x0000000000000000000000000000000000000000",
+        makerAssetId: "1234",
+        makerAmount: "100000000",
+        takerAmount: "50000000",
+        side: Side.BUY,
+        feeRateBps: "100",
+        nonce: "0",
+      } as OrderData);
       expect(signedOrder).not.null;
       expect(signedOrder).not.undefined;
 
