@@ -1,15 +1,11 @@
 import { expect } from "chai";
 import { StaticJsonRpcProvider } from "@ethersproject/providers";
 import { Wallet } from "@ethersproject/wallet";
-import { resolve } from "path";
-import { config as dotenvConfig } from "dotenv";
 import { getContracts } from "../../src/networks";
 import { ExchangeOrderBuilder } from "../../src/exchange.order.builder";
 import { generateOrderSalt } from "../../src/utils";
 import { Order, OrderData } from "../../src/model/order.model";
 import { Side } from "../../src/model/order-side.model";
-
-dotenvConfig({ path: resolve(__dirname, "../../.env") });
 
 describe("exchange order builder", () => {
   let wallet: Wallet;
