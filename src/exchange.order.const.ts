@@ -32,14 +32,3 @@ export const ORDER_STRUCTURE = [
     { name: 'feeRateBps', type: 'uint256' },
     { name: 'signatureType', type: 'uint256' },
 ];
-
-// Contract's methods
-export enum ExchangeMethods {
-    fillOrder = 'fillOrder',
-    fillOrders = 'fillOrders',
-    matchOrders = 'matchOrders',
-    cancelOrder = 'cancelOrder',
-    cancelOrders = 'cancelOrders',
-    incrementNonce = 'incrementNonce',
-    isValidNonce = 'isValidNonce',
-}
