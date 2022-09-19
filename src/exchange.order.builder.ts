@@ -1,3 +1,4 @@
+import { JsonRpcSigner } from '@ethersproject/providers';
 import {
     SignTypedDataVersion,
     TypedDataUtils,
@@ -26,7 +27,7 @@ export class ExchangeOrderBuilder {
     constructor(
         private readonly contractAddress: string,
         private readonly chainId: number,
-        private readonly signer: Wallet,
+        private readonly signer: Wallet | JsonRpcSigner,
         private readonly generateSalt = generateOrderSalt
     ) {}
 

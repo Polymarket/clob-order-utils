@@ -32,6 +32,7 @@
     "postbuild": "cp package.json dist && cp README.md dist"
   },
   "dependencies": {
+    "@ethersproject/providers": "^5.7.1",
     "@metamask/eth-sig-util": "^5.0.0",
     "ethers": "^5.7.1"
   },
