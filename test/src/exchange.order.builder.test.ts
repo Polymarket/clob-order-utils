@@ -1,5 +1,4 @@
 import { expect } from "chai";
-import { StaticJsonRpcProvider } from "@ethersproject/providers";
 import { Wallet } from "@ethersproject/wallet";
 import { getContracts } from "../../src/networks";
 import { ExchangeOrderBuilder } from "../../src/exchange.order.builder";
@@ -15,14 +14,10 @@ describe("exchange order builder", () => {
     const chainId = 80001;
     const contracts = getContracts(chainId);
 
-    const provider = new StaticJsonRpcProvider(
-      "https://rpc-mumbai.maticvigil.com"
-    );
-
     // publicly known private key
     const privateKey =
       "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
-    wallet = new Wallet(privateKey).connect(provider);
+    wallet = new Wallet(privateKey);
 
     exchangeOrderBuilder = new ExchangeOrderBuilder(
       contracts.Exchange,
