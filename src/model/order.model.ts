@@ -10,17 +10,14 @@ export interface OrderData {
     /**
      * Maker of the order, i.e the source of funds for the order
      */
-    makerAddress: string;
+    maker: string;
 
     /**
-     * If BUY, this is the tokenId of the asset to be bought
+     * Token Id of the CTF ERC1155 asset to be bought or sold.
+     * If BUY, this is the tokenId of the asset to be bought, i.e the makerAssetId
+     * If SELL, this is the tokenId of the asset to be sold, i.e the  takerAssetId
      */
-    makerAssetId: string;
-
-    /**
-     * If SELL, this is the tokenId of the asset to be sold
-     */
-    takerAssetId: string;
+    tokenId: string;
 
     /**
      * Maker amount, i.e the max amount of tokens to be sold

@@ -38,8 +38,8 @@ describe("exchange order builder", () => {
   describe("buildOrder", () => {
     it("random salt", () => {
       const order = exchangeOrderBuilder.buildOrder({
-        makerAddress: "0x0000000000000000000000000000000000000000",
-        makerAssetId: "1234",
+        maker: "0x0000000000000000000000000000000000000000",
+        tokenId: "1234",
         makerAmount: "100000000",
         takerAmount: "50000000",
         side: Side.BUY,
@@ -57,8 +57,8 @@ describe("exchange order builder", () => {
       };
 
       const order = exchangeOrderBuilder.buildOrder({
-        makerAddress: "0x0000000000000000000000000000000000000000",
-        makerAssetId: "1234",
+        maker: "0x0000000000000000000000000000000000000000",
+        tokenId: "1234",
         makerAmount: "100000000",
         takerAmount: "50000000",
         side: Side.BUY,
@@ -88,8 +88,8 @@ describe("exchange order builder", () => {
   describe("buildLimitOrderTypedData", () => {
     it("random salt", () => {
       const order = exchangeOrderBuilder.buildOrder({
-        makerAddress: "0x0000000000000000000000000000000000000000",
-        makerAssetId: "1234",
+        maker: "0x0000000000000000000000000000000000000000",
+        tokenId: "1234",
         makerAmount: "100000000",
         takerAmount: "50000000",
         side: Side.BUY,
@@ -111,8 +111,8 @@ describe("exchange order builder", () => {
       };
 
       const order = exchangeOrderBuilder.buildOrder({
-        makerAddress: "0x0000000000000000000000000000000000000000",
-        makerAssetId: "1234",
+        maker: "0x0000000000000000000000000000000000000000",
+        tokenId: "1234",
         makerAmount: "100000000",
         takerAmount: "50000000",
         side: Side.BUY,
@@ -176,8 +176,8 @@ describe("exchange order builder", () => {
   describe("buildOrderSignature", async () => {
     it("random salt", async () => {
       const order = exchangeOrderBuilder.buildOrder({
-        makerAddress: "0x0000000000000000000000000000000000000000",
-        makerAssetId: "1234",
+        maker: "0x0000000000000000000000000000000000000000",
+        tokenId: "1234",
         makerAmount: "100000000",
         takerAmount: "50000000",
         side: Side.BUY,
@@ -205,8 +205,8 @@ describe("exchange order builder", () => {
       };
 
       const order = exchangeOrderBuilder.buildOrder({
-        makerAddress: "0x0000000000000000000000000000000000000000",
-        makerAssetId: "1234",
+        maker: "0x0000000000000000000000000000000000000000",
+        tokenId: "1234",
         makerAmount: "100000000",
         takerAmount: "50000000",
         side: Side.BUY,
@@ -236,8 +236,8 @@ describe("exchange order builder", () => {
   describe("buildOrderHash", () => {
     it("random salt", () => {
       const order = exchangeOrderBuilder.buildOrder({
-        makerAddress: "0x0000000000000000000000000000000000000000",
-        makerAssetId: "1234",
+        maker: "0x0000000000000000000000000000000000000000",
+        tokenId: "1234",
         makerAmount: "100000000",
         takerAmount: "50000000",
         side: Side.BUY,
@@ -263,8 +263,8 @@ describe("exchange order builder", () => {
       };
 
       const order = exchangeOrderBuilder.buildOrder({
-        makerAddress: "0x0000000000000000000000000000000000000000",
-        makerAssetId: "1234",
+        maker: "0x0000000000000000000000000000000000000000",
+        tokenId: "1234",
         makerAmount: "100000000",
         takerAmount: "50000000",
         side: Side.BUY,
@@ -292,8 +292,8 @@ describe("exchange order builder", () => {
   describe("buildSignedOrder", async () => {
     it("random salt", async () => {
       const signedOrder = await exchangeOrderBuilder.buildSignedOrder({
-        makerAddress: "0x0000000000000000000000000000000000000000",
-        makerAssetId: "1234",
+        maker: "0x0000000000000000000000000000000000000000",
+        tokenId: "1234",
         makerAmount: "100000000",
         takerAmount: "50000000",
         side: Side.BUY,
@@ -310,8 +310,8 @@ describe("exchange order builder", () => {
       };
 
       const signedOrder = await exchangeOrderBuilder.buildSignedOrder({
-        makerAddress: "0x0000000000000000000000000000000000000000",
-        makerAssetId: "1234",
+        maker: "0x0000000000000000000000000000000000000000",
+        tokenId: "1234",
         makerAmount: "100000000",
         takerAmount: "50000000",
         side: Side.BUY,

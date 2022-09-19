@@ -52,9 +52,8 @@ export class ExchangeOrderBuilder {
      * @returns a Order object (not signed)
      */
     buildOrder({
-        makerAddress,
-        makerAssetId,
-        takerAssetId,
+        maker,
+        tokenId,
         makerAmount,
         takerAmount,
         side,
@@ -65,14 +64,7 @@ export class ExchangeOrderBuilder {
         signatureType,
     }: OrderData): Order {
         if (typeof signer == 'undefined' || !signer) {
-            signer = makerAddress;
-        }
-
-        let tokenId = '';
-        if (typeof takerAssetId != 'undefined' && takerAssetId) {
-            tokenId = takerAssetId;
-        } else {
-            tokenId = makerAssetId;
+            signer = maker;
         }
 
         if (typeof expiration == 'undefined' || !expiration) {
@@ -86,16 +78,16 @@ export class ExchangeOrderBuilder {
 
         return {
             salt: this.generateSalt(),
-            maker: makerAddress,
-            signer: signer,
-            tokenId: tokenId,
-            makerAmount: makerAmount,
-            takerAmount: takerAmount,
-            side: side,
-            expiration: expiration,
-            nonce: nonce,
-            feeRateBps: feeRateBps,
-            signatureType: signatureType,
+            maker,
+            signer,
+            tokenId,
+            makerAmount,
+            takerAmount,
+            side,
+            expiration,
+            nonce,
+            feeRateBps,
+            signatureType,
         };
     }
 
