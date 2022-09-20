@@ -37,7 +37,7 @@ export class ExchangeOrderBuilder {
      * @returns a SignedOrder object (order + signature)
      */
     async buildSignedOrder(orderData: OrderData): Promise<SignedOrder> {
-        const order = this.buildOrder(orderData);
+        const order = await this.buildOrder(orderData);
         const orderTypedData = this.buildOrderTypedData(order);
         const orderSignature = await this.buildOrderSignature(orderTypedData);
 
@@ -52,7 +52,7 @@ export class ExchangeOrderBuilder {
      * @param OrderData
      * @returns a Order object (not signed)
      */
-    buildOrder({
+    async buildOrder({
         maker,
         tokenId,
         makerAmount,
@@ -63,9 +63,14 @@ export class ExchangeOrderBuilder {
         signer,
         expiration,
         signatureType,
-    }: OrderData): Order {
+    }: OrderData): Promise<Order> {
         if (typeof signer == 'undefined' || !signer) {
             signer = maker;
+        }
+
+        const signerAddress = await this.signer.getAddress();
+        if (signer !== signerAddress) {
+            throw new Error('signer does not match');
         }
 
         if (typeof expiration == 'undefined' || !expiration) {
