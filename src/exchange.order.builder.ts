@@ -54,6 +54,7 @@ export class ExchangeOrderBuilder {
      */
     async buildOrder({
         maker,
+        taker,
         tokenId,
         makerAmount,
         takerAmount,
@@ -86,13 +87,14 @@ export class ExchangeOrderBuilder {
             salt: this.generateSalt(),
             maker,
             signer,
+            taker,
             tokenId,
             makerAmount,
             takerAmount,
-            side,
             expiration,
             nonce,
             feeRateBps,
+            side,
             signatureType,
         };
     }
@@ -115,7 +117,20 @@ export class ExchangeOrderBuilder {
                 chainId: this.chainId,
                 verifyingContract: this.contractAddress,
             },
-            message: order,
+            message: {
+                salt: order.salt,
+                maker: order.maker,
+                signer: order.signer,
+                taker: order.taker,
+                tokenId: order.tokenId,
+                makerAmount: order.makerAmount,
+                takerAmount: order.takerAmount,
+                expiration: order.expiration,
+                nonce: order.nonce,
+                feeRateBps: order.feeRateBps,
+                side: order.side,
+                signatureType: order.signatureType,
+            },
         };
     }
 

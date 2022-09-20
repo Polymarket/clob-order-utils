@@ -2,8 +2,8 @@
     "compileOnSave": false,
     "include": ["src/**/*"],
     "exclude": [
-        "src/**/*.test.ts", 
-        "test/*",
+        "src/**/*.test.ts",
+        "tests/**",
         "node_modules",
         "./node_modules",
         "./node_modules/*",

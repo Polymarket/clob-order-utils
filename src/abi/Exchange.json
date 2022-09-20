@@ -1,115 +1,31 @@
 [
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "_collateral",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_ctf",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_proxyFactory",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_safeFactory",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_feeReceiver",
-        "type": "address"
-      }
+      { "internalType": "address", "name": "_collateral", "type": "address" },
+      { "internalType": "address", "name": "_ctf", "type": "address" },
+      { "internalType": "address", "name": "_proxyFactory", "type": "address" },
+      { "internalType": "address", "name": "_safeFactory", "type": "address" }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
-  {
-    "inputs": [],
-    "name": "AlreadyFilled",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "AlreadyRegistered",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "FeeTooHigh",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidComplement",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidNonce",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidSignature",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidTokenId",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "MakingGtRemaining",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "MismatchedTokenIds",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "NotAdmin",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "NotCrossing",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "NotOperator",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "NotOwner",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "OrderExpired",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "Paused",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "TooLittleTokensReceived",
-    "type": "error"
-  },
+  { "inputs": [], "name": "AlreadyRegistered", "type": "error" },
+  { "inputs": [], "name": "FeeTooHigh", "type": "error" },
+  { "inputs": [], "name": "InvalidComplement", "type": "error" },
+  { "inputs": [], "name": "InvalidNonce", "type": "error" },
+  { "inputs": [], "name": "InvalidSignature", "type": "error" },
+  { "inputs": [], "name": "InvalidTokenId", "type": "error" },
+  { "inputs": [], "name": "MakingGtRemaining", "type": "error" },
+  { "inputs": [], "name": "MismatchedTokenIds", "type": "error" },
+  { "inputs": [], "name": "NotAdmin", "type": "error" },
+  { "inputs": [], "name": "NotCrossing", "type": "error" },
+  { "inputs": [], "name": "NotOperator", "type": "error" },
+  { "inputs": [], "name": "NotOwner", "type": "error" },
+  { "inputs": [], "name": "NotTaker", "type": "error" },
+  { "inputs": [], "name": "OrderExpired", "type": "error" },
+  { "inputs": [], "name": "OrderFilledOrCancelled", "type": "error" },
+  { "inputs": [], "name": "Paused", "type": "error" },
+  { "inputs": [], "name": "TooLittleTokensReceived", "type": "error" },
   {
     "anonymous": false,
     "inputs": [
@@ -132,26 +48,7 @@
         "type": "uint256"
       }
     ],
-    "name": "FeeReceived",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "oldFeeReceiver",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "newFeeReceiver",
-        "type": "address"
-      }
-    ],
-    "name": "FeeReceiverUpdated",
+    "name": "FeeCharged",
     "type": "event"
   },
   {
@@ -419,25 +316,8 @@
     "type": "event"
   },
   {
-    "inputs": [],
-    "name": "MAX_FEE_RATE_BIPS",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "admin_",
-        "type": "address"
-      }
+      { "internalType": "address", "name": "admin_", "type": "address" }
     ],
     "name": "addAdmin",
     "outputs": [],
@@ -446,11 +326,7 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "operator_",
-        "type": "address"
-      }
+      { "internalType": "address", "name": "operator_", "type": "address" }
     ],
     "name": "addOperator",
     "outputs": [],
@@ -458,21 +334,9 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "name": "admins",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -480,26 +344,11 @@
     "inputs": [
       {
         "components": [
-          {
-            "internalType": "uint256",
-            "name": "salt",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "maker",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "signer",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "tokenId",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "salt", "type": "uint256" },
+          { "internalType": "address", "name": "maker", "type": "address" },
+          { "internalType": "address", "name": "signer", "type": "address" },
+          { "internalType": "address", "name": "taker", "type": "address" },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "makerAmount",
@@ -511,35 +360,23 @@
             "type": "uint256"
           },
           {
-            "internalType": "enum Side",
-            "name": "side",
-            "type": "uint8"
-          },
-          {
             "internalType": "uint256",
             "name": "expiration",
             "type": "uint256"
           },
-          {
-            "internalType": "uint256",
-            "name": "nonce",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "nonce", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "feeRateBps",
             "type": "uint256"
           },
+          { "internalType": "enum Side", "name": "side", "type": "uint8" },
           {
-            "internalType": "uint256",
+            "internalType": "enum SignatureType",
             "name": "signatureType",
-            "type": "uint256"
+            "type": "uint8"
           },
-          {
-            "internalType": "bytes",
-            "name": "signature",
-            "type": "bytes"
-          }
+          { "internalType": "bytes", "name": "signature", "type": "bytes" }
         ],
         "internalType": "struct Order",
         "name": "order",
@@ -555,26 +392,11 @@
     "inputs": [
       {
         "components": [
-          {
-            "internalType": "uint256",
-            "name": "salt",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "maker",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "signer",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "tokenId",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "salt", "type": "uint256" },
+          { "internalType": "address", "name": "maker", "type": "address" },
+          { "internalType": "address", "name": "signer", "type": "address" },
+          { "internalType": "address", "name": "taker", "type": "address" },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "makerAmount",
@@ -586,35 +408,23 @@
             "type": "uint256"
           },
           {
-            "internalType": "enum Side",
-            "name": "side",
-            "type": "uint8"
-          },
-          {
             "internalType": "uint256",
             "name": "expiration",
             "type": "uint256"
           },
-          {
-            "internalType": "uint256",
-            "name": "nonce",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "nonce", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "feeRateBps",
             "type": "uint256"
           },
+          { "internalType": "enum Side", "name": "side", "type": "uint8" },
           {
-            "internalType": "uint256",
+            "internalType": "enum SignatureType",
             "name": "signatureType",
-            "type": "uint256"
+            "type": "uint8"
           },
-          {
-            "internalType": "bytes",
-            "name": "signature",
-            "type": "bytes"
-          }
+          { "internalType": "bytes", "name": "signature", "type": "bytes" }
         ],
         "internalType": "struct Order[]",
         "name": "orders",
@@ -628,53 +438,8 @@
   },
   {
     "inputs": [],
-    "name": "collateral",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "ctf",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "domainSeparator",
-    "outputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "feeReceiver",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -682,26 +447,11 @@
     "inputs": [
       {
         "components": [
-          {
-            "internalType": "uint256",
-            "name": "salt",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "maker",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "signer",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "tokenId",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "salt", "type": "uint256" },
+          { "internalType": "address", "name": "maker", "type": "address" },
+          { "internalType": "address", "name": "signer", "type": "address" },
+          { "internalType": "address", "name": "taker", "type": "address" },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "makerAmount",
@@ -713,45 +463,29 @@
             "type": "uint256"
           },
           {
-            "internalType": "enum Side",
-            "name": "side",
-            "type": "uint8"
-          },
-          {
             "internalType": "uint256",
             "name": "expiration",
             "type": "uint256"
           },
-          {
-            "internalType": "uint256",
-            "name": "nonce",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "nonce", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "feeRateBps",
             "type": "uint256"
           },
+          { "internalType": "enum Side", "name": "side", "type": "uint8" },
           {
-            "internalType": "uint256",
+            "internalType": "enum SignatureType",
             "name": "signatureType",
-            "type": "uint256"
+            "type": "uint8"
           },
-          {
-            "internalType": "bytes",
-            "name": "signature",
-            "type": "bytes"
-          }
+          { "internalType": "bytes", "name": "signature", "type": "bytes" }
         ],
         "internalType": "struct Order",
         "name": "order",
         "type": "tuple"
       },
-      {
-        "internalType": "uint256",
-        "name": "fillAmount",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "fillAmount", "type": "uint256" }
     ],
     "name": "fillOrder",
     "outputs": [],
@@ -762,26 +496,11 @@
     "inputs": [
       {
         "components": [
-          {
-            "internalType": "uint256",
-            "name": "salt",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "maker",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "signer",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "tokenId",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "salt", "type": "uint256" },
+          { "internalType": "address", "name": "maker", "type": "address" },
+          { "internalType": "address", "name": "signer", "type": "address" },
+          { "internalType": "address", "name": "taker", "type": "address" },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "makerAmount",
@@ -793,35 +512,23 @@
             "type": "uint256"
           },
           {
-            "internalType": "enum Side",
-            "name": "side",
-            "type": "uint8"
-          },
-          {
             "internalType": "uint256",
             "name": "expiration",
             "type": "uint256"
           },
-          {
-            "internalType": "uint256",
-            "name": "nonce",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "nonce", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "feeRateBps",
             "type": "uint256"
           },
+          { "internalType": "enum Side", "name": "side", "type": "uint8" },
           {
-            "internalType": "uint256",
+            "internalType": "enum SignatureType",
             "name": "signatureType",
-            "type": "uint256"
+            "type": "uint8"
           },
-          {
-            "internalType": "bytes",
-            "name": "signature",
-            "type": "bytes"
-          }
+          { "internalType": "bytes", "name": "signature", "type": "bytes" }
         ],
         "internalType": "struct Order[]",
         "name": "orders",
@@ -841,100 +548,45 @@
   {
     "inputs": [],
     "name": "getCollateral",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "token",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "token", "type": "uint256" }
     ],
     "name": "getComplement",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "token",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "token", "type": "uint256" }
     ],
     "name": "getConditionId",
-    "outputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "getCtf",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getFeeReceiver",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "getMaxFeeRate",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "pure",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "orderHash",
-        "type": "bytes32"
-      }
+      { "internalType": "bytes32", "name": "orderHash", "type": "bytes32" }
     ],
     "name": "getOrderStatus",
     "outputs": [
@@ -942,14 +594,10 @@
         "components": [
           {
             "internalType": "bool",
-            "name": "isCompleted",
+            "name": "isFilledOrCancelled",
             "type": "bool"
           },
-          {
-            "internalType": "uint256",
-            "name": "remaining",
-            "type": "uint256"
-          }
+          { "internalType": "uint256", "name": "remaining", "type": "uint256" }
         ],
         "internalType": "struct OrderStatus",
         "name": "",
@@ -962,90 +610,46 @@
   {
     "inputs": [],
     "name": "getPolyProxyFactoryImplementation",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "_addr",
-        "type": "address"
-      }
+      { "internalType": "address", "name": "_addr", "type": "address" }
     ],
     "name": "getPolyProxyWalletAddress",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "getProxyFactory",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "_addr",
-        "type": "address"
-      }
+      { "internalType": "address", "name": "_addr", "type": "address" }
     ],
     "name": "getSafeAddress",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "getSafeFactory",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "getSafeFactoryImplementation",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -1053,26 +657,11 @@
     "inputs": [
       {
         "components": [
-          {
-            "internalType": "uint256",
-            "name": "salt",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "maker",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "signer",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "tokenId",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "salt", "type": "uint256" },
+          { "internalType": "address", "name": "maker", "type": "address" },
+          { "internalType": "address", "name": "signer", "type": "address" },
+          { "internalType": "address", "name": "taker", "type": "address" },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "makerAmount",
@@ -1084,35 +673,23 @@
             "type": "uint256"
           },
           {
-            "internalType": "enum Side",
-            "name": "side",
-            "type": "uint8"
-          },
-          {
             "internalType": "uint256",
             "name": "expiration",
             "type": "uint256"
           },
-          {
-            "internalType": "uint256",
-            "name": "nonce",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "nonce", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "feeRateBps",
             "type": "uint256"
           },
+          { "internalType": "enum Side", "name": "side", "type": "uint8" },
           {
-            "internalType": "uint256",
+            "internalType": "enum SignatureType",
             "name": "signatureType",
-            "type": "uint256"
+            "type": "uint8"
           },
-          {
-            "internalType": "bytes",
-            "name": "signature",
-            "type": "bytes"
-          }
+          { "internalType": "bytes", "name": "signature", "type": "bytes" }
         ],
         "internalType": "struct Order",
         "name": "order",
@@ -1120,13 +697,7 @@
       }
     ],
     "name": "hashOrder",
-    "outputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -1138,64 +709,26 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "usr",
-        "type": "address"
-      }
-    ],
+    "inputs": [{ "internalType": "address", "name": "usr", "type": "address" }],
     "name": "isAdmin",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "usr",
-        "type": "address"
-      }
-    ],
+    "inputs": [{ "internalType": "address", "name": "usr", "type": "address" }],
     "name": "isOperator",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "usr",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "nonce",
-        "type": "uint256"
-      }
+      { "internalType": "address", "name": "usr", "type": "address" },
+      { "internalType": "uint256", "name": "nonce", "type": "uint256" }
     ],
     "name": "isValidNonce",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -1203,26 +736,11 @@
     "inputs": [
       {
         "components": [
-          {
-            "internalType": "uint256",
-            "name": "salt",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "maker",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "signer",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "tokenId",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "salt", "type": "uint256" },
+          { "internalType": "address", "name": "maker", "type": "address" },
+          { "internalType": "address", "name": "signer", "type": "address" },
+          { "internalType": "address", "name": "taker", "type": "address" },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "makerAmount",
@@ -1234,35 +752,23 @@
             "type": "uint256"
           },
           {
-            "internalType": "enum Side",
-            "name": "side",
-            "type": "uint8"
-          },
-          {
             "internalType": "uint256",
             "name": "expiration",
             "type": "uint256"
           },
-          {
-            "internalType": "uint256",
-            "name": "nonce",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "nonce", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "feeRateBps",
             "type": "uint256"
           },
+          { "internalType": "enum Side", "name": "side", "type": "uint8" },
           {
-            "internalType": "uint256",
+            "internalType": "enum SignatureType",
             "name": "signatureType",
-            "type": "uint256"
+            "type": "uint8"
           },
-          {
-            "internalType": "bytes",
-            "name": "signature",
-            "type": "bytes"
-          }
+          { "internalType": "bytes", "name": "signature", "type": "bytes" }
         ],
         "internalType": "struct Order",
         "name": "takerOrder",
@@ -1270,26 +776,11 @@
       },
       {
         "components": [
-          {
-            "internalType": "uint256",
-            "name": "salt",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "maker",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "signer",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "tokenId",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "salt", "type": "uint256" },
+          { "internalType": "address", "name": "maker", "type": "address" },
+          { "internalType": "address", "name": "signer", "type": "address" },
+          { "internalType": "address", "name": "taker", "type": "address" },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "makerAmount",
@@ -1301,35 +792,23 @@
             "type": "uint256"
           },
           {
-            "internalType": "enum Side",
-            "name": "side",
-            "type": "uint8"
-          },
-          {
             "internalType": "uint256",
             "name": "expiration",
             "type": "uint256"
           },
-          {
-            "internalType": "uint256",
-            "name": "nonce",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "nonce", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "feeRateBps",
             "type": "uint256"
           },
+          { "internalType": "enum Side", "name": "side", "type": "uint8" },
           {
-            "internalType": "uint256",
+            "internalType": "enum SignatureType",
             "name": "signatureType",
-            "type": "uint256"
+            "type": "uint8"
           },
-          {
-            "internalType": "bytes",
-            "name": "signature",
-            "type": "bytes"
-          }
+          { "internalType": "bytes", "name": "signature", "type": "bytes" }
         ],
         "internalType": "struct Order[]",
         "name": "makerOrders",
@@ -1352,141 +831,51 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "name": "nonces",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "bytes",
-        "name": "",
-        "type": "bytes"
-      }
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "uint256[]", "name": "", "type": "uint256[]" },
+      { "internalType": "uint256[]", "name": "", "type": "uint256[]" },
+      { "internalType": "bytes", "name": "", "type": "bytes" }
     ],
     "name": "onERC1155BatchReceived",
-    "outputs": [
-      {
-        "internalType": "bytes4",
-        "name": "",
-        "type": "bytes4"
-      }
-    ],
+    "outputs": [{ "internalType": "bytes4", "name": "", "type": "bytes4" }],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bytes",
-        "name": "",
-        "type": "bytes"
-      }
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      { "internalType": "bytes", "name": "", "type": "bytes" }
     ],
     "name": "onERC1155Received",
-    "outputs": [
-      {
-        "internalType": "bytes4",
-        "name": "",
-        "type": "bytes4"
-      }
-    ],
+    "outputs": [{ "internalType": "bytes4", "name": "", "type": "bytes4" }],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "name": "operators",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
+    "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
     "name": "orderStatus",
     "outputs": [
-      {
-        "internalType": "bool",
-        "name": "isCompleted",
-        "type": "bool"
-      },
-      {
-        "internalType": "uint256",
-        "name": "remaining",
-        "type": "uint256"
-      }
+      { "internalType": "bool", "name": "isFilledOrCancelled", "type": "bool" },
+      { "internalType": "uint256", "name": "remaining", "type": "uint256" }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -1494,13 +883,7 @@
   {
     "inputs": [],
     "name": "parentCollectionId",
-    "outputs": [
-      {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -1514,46 +897,22 @@
   {
     "inputs": [],
     "name": "paused",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "proxyFactory",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "token",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "complement",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bytes32",
-        "name": "conditionId",
-        "type": "bytes32"
-      }
+      { "internalType": "uint256", "name": "token", "type": "uint256" },
+      { "internalType": "uint256", "name": "complement", "type": "uint256" },
+      { "internalType": "bytes32", "name": "conditionId", "type": "bytes32" }
     ],
     "name": "registerToken",
     "outputs": [],
@@ -1561,41 +920,18 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "name": "registry",
     "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "token",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "complement",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bytes32",
-        "name": "conditionId",
-        "type": "bytes32"
-      }
+      { "internalType": "uint256", "name": "complement", "type": "uint256" },
+      { "internalType": "bytes32", "name": "conditionId", "type": "bytes32" }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "admin",
-        "type": "address"
-      }
+      { "internalType": "address", "name": "admin", "type": "address" }
     ],
     "name": "removeAdmin",
     "outputs": [],
@@ -1604,11 +940,7 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "operator",
-        "type": "address"
-      }
+      { "internalType": "address", "name": "operator", "type": "address" }
     ],
     "name": "removeOperator",
     "outputs": [],
@@ -1617,28 +949,23 @@
   },
   {
     "inputs": [],
-    "name": "safeFactory",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
+    "name": "renounceAdminRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_feeReceiver",
-        "type": "address"
-      }
-    ],
-    "name": "setFeeReceiver",
+    "inputs": [],
+    "name": "renounceOperatorRole",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "safeFactory",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -1669,20 +996,10 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "bytes4",
-        "name": "interfaceId",
-        "type": "bytes4"
-      }
+      { "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }
     ],
     "name": "supportsInterface",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -1695,16 +1012,8 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "token",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "complement",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "token", "type": "uint256" },
+      { "internalType": "uint256", "name": "complement", "type": "uint256" }
     ],
     "name": "validateComplement",
     "outputs": [],
@@ -1714,45 +1023,12 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "token0",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "token1",
-        "type": "uint256"
-      }
-    ],
-    "name": "validateMatchingTokenIds",
-    "outputs": [],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "components": [
-          {
-            "internalType": "uint256",
-            "name": "salt",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "maker",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "signer",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "tokenId",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "salt", "type": "uint256" },
+          { "internalType": "address", "name": "maker", "type": "address" },
+          { "internalType": "address", "name": "signer", "type": "address" },
+          { "internalType": "address", "name": "taker", "type": "address" },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "makerAmount",
@@ -1764,35 +1040,23 @@
             "type": "uint256"
           },
           {
-            "internalType": "enum Side",
-            "name": "side",
-            "type": "uint8"
-          },
-          {
             "internalType": "uint256",
             "name": "expiration",
             "type": "uint256"
           },
-          {
-            "internalType": "uint256",
-            "name": "nonce",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "nonce", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "feeRateBps",
             "type": "uint256"
           },
+          { "internalType": "enum Side", "name": "side", "type": "uint8" },
           {
-            "internalType": "uint256",
+            "internalType": "enum SignatureType",
             "name": "signatureType",
-            "type": "uint256"
+            "type": "uint8"
           },
-          {
-            "internalType": "bytes",
-            "name": "signature",
-            "type": "bytes"
-          }
+          { "internalType": "bytes", "name": "signature", "type": "bytes" }
         ],
         "internalType": "struct Order",
         "name": "order",
@@ -1806,33 +1070,14 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "orderHash",
-        "type": "bytes32"
-      },
+      { "internalType": "bytes32", "name": "orderHash", "type": "bytes32" },
       {
         "components": [
-          {
-            "internalType": "uint256",
-            "name": "salt",
-            "type": "uint256"
-          },
-          {
-            "internalType": "address",
-            "name": "maker",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "signer",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "tokenId",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "salt", "type": "uint256" },
+          { "internalType": "address", "name": "maker", "type": "address" },
+          { "internalType": "address", "name": "signer", "type": "address" },
+          { "internalType": "address", "name": "taker", "type": "address" },
+          { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "makerAmount",
@@ -1844,35 +1089,23 @@
             "type": "uint256"
           },
           {
-            "internalType": "enum Side",
-            "name": "side",
-            "type": "uint8"
-          },
-          {
             "internalType": "uint256",
             "name": "expiration",
             "type": "uint256"
           },
-          {
-            "internalType": "uint256",
-            "name": "nonce",
-            "type": "uint256"
-          },
+          { "internalType": "uint256", "name": "nonce", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "feeRateBps",
             "type": "uint256"
           },
+          { "internalType": "enum Side", "name": "side", "type": "uint8" },
           {
-            "internalType": "uint256",
+            "internalType": "enum SignatureType",
             "name": "signatureType",
-            "type": "uint256"
+            "type": "uint8"
           },
-          {
-            "internalType": "bytes",
-            "name": "signature",
-            "type": "bytes"
-          }
+          { "internalType": "bytes", "name": "signature", "type": "bytes" }
         ],
         "internalType": "struct Order",
         "name": "order",
@@ -1886,11 +1119,7 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
     ],
     "name": "validateTokenId",
     "outputs": [],

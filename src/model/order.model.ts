@@ -13,6 +13,11 @@ export interface OrderData {
     maker: string;
 
     /**
+     * Address of the order taker. The zero address is used to indicate a public order
+     */
+    taker: string;
+
+    /**
      * Token Id of the CTF ERC1155 asset to be bought or sold.
      * If BUY, this is the tokenId of the asset to be bought, i.e the makerAssetId
      * If SELL, this is the tokenId of the asset to be sold, i.e the  takerAssetId
@@ -78,6 +83,11 @@ export interface Order extends EIP712Object {
     readonly signer: string;
 
     /**
+     * Address of the order taker. The zero address is used to indicate a public order
+     */
+    readonly taker: string;
+
+    /**
      * Token Id of the CTF ERC1155 asset to be bought or sold.
      * If BUY, this is the tokenId of the asset to be bought, i.e the makerAssetId
      * If SELL, this is the tokenId of the asset to be sold, i.e the  takerAssetId
@@ -95,11 +105,6 @@ export interface Order extends EIP712Object {
     readonly takerAmount: string;
 
     /**
-     * The side of the order, BUY or SELL
-     */
-    readonly side: Side;
-
-    /**
      * Timestamp after which the order is expired
      */
     readonly expiration: string;
@@ -113,6 +118,11 @@ export interface Order extends EIP712Object {
      * Fee rate, in basis points, charged to the order maker, charged on proceeds
      */
     readonly feeRateBps: string;
+
+    /**
+     * The side of the order, BUY or SELL
+     */
+    readonly side: Side;
 
     /**
      * Signature type used by the Order
