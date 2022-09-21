@@ -145,7 +145,7 @@ describe('exchange order builder', () => {
                     version: '1',
                     chainId: 80001,
                     verifyingContract:
-                        '0x0000000000000000000000000000000000000000', // TODO(REC): update me
+                        '0xdFE02Eb6733538f8Ea35D585af8DE5958AD99E40',
                 },
                 message: {
                     salt: orderTypedData.message.salt,
@@ -217,7 +217,7 @@ describe('exchange order builder', () => {
                     version: '1',
                     chainId: 80001,
                     verifyingContract:
-                        '0x0000000000000000000000000000000000000000', // TODO(REC): update me
+                        '0xdFE02Eb6733538f8Ea35D585af8DE5958AD99E40',
                 },
                 message: {
                     salt: '479249096354',
@@ -296,7 +296,7 @@ describe('exchange order builder', () => {
             expect(orderSignature).not.empty;
 
             expect(orderSignature).deep.equal(
-                '0xb233b07b1730105d9569f4358aeddc61039b2b91da8bf96fb4c6d1efdf701fb679262b801d28b3262b24630931edc434b3bdae918d98b7dab2be5a3c904f63b41c'
+                '0x8388a5ebe31745a3225612cece129a494122f924e60691c9893901d10e996a01372f1dbde25952cb07719af209bf6b96592c513239aac82ec775846e4b09ee191c'
             );
         });
     });
@@ -358,7 +358,7 @@ describe('exchange order builder', () => {
             expect(orderHash).not.undefined;
 
             expect(orderHash).deep.equal(
-                '0xcb61637e35c2870e125d337ec8d555d5b45d6691eee473e974aab9c5f875927b'
+                '0xffe5ee610bb27006448785a9af0b8b24c729632cc9ed78a5d571cf053cd2eba3'
             );
         });
     });
@@ -427,7 +427,7 @@ describe('exchange order builder', () => {
                 feeRateBps: '100',
                 signatureType: 0,
                 signature:
-                    '0xb233b07b1730105d9569f4358aeddc61039b2b91da8bf96fb4c6d1efdf701fb679262b801d28b3262b24630931edc434b3bdae918d98b7dab2be5a3c904f63b41c',
+                    '0x8388a5ebe31745a3225612cece129a494122f924e60691c9893901d10e996a01372f1dbde25952cb07719af209bf6b96592c513239aac82ec775846e4b09ee191c',
             });
         });
     });
