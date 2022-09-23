@@ -8,7 +8,7 @@ describe('getContracts', () => {
         expect(contracts).not.undefined;
 
         expect(contracts.Exchange).equal(
-            '0xdFE02Eb6733538f8Ea35D585af8DE5958AD99E40'
+            '0xfffd6f0dB1ec30A58884B23546B4F1bB333f818f'
         );
         expect(contracts.Collateral).equal(
             '0x2E8DCfE708D44ae2e406a1c02DFE2Fa13012f961'
@@ -24,7 +24,7 @@ describe('getContracts', () => {
         expect(contracts).not.undefined;
 
         expect(contracts.Exchange).equal(
-            '0x0000000000000000000000000000000000000000'
+            '0xfffd6f0dB1ec30A58884B23546B4F1bB333f818f'
         );
         expect(contracts.Collateral).equal(
             '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174'
