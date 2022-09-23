@@ -1,109 +1,138 @@
-import {SignatureType} from '../signature-types';
-import {EIP712Object} from './eip712.model';
+import { EIP712Object } from './eip712.model';
+import { Side } from './order-side.model';
+import { SignatureType } from './signature-types.model';
 
-export type LimitOrderSignature = string;
+export type OrderSignature = string;
 
-export type LimitOrderHash = string;
+export type OrderHash = string;
 
-export interface LimitOrderData {
-    exchangeAddress: string;
-    makerAddress: string;
-    takerAddress?: string; // Optional, by default = ZERO_ADDRESS
-    makerAssetAddress: string;
-    makerAssetID?: string;
-    takerAssetAddress: string;
-    takerAssetID?: string;
-    makerAmount: string;
-    takerAmount: string;
-    signer?: string; // Address performing the signing
-    sigType?: SignatureType; // Signature scheme being used
-    expiry?: number;
-    nonce?: number;
-    predicate?: string;
-}
-
-export interface LimitOrder extends EIP712Object {
-    salt: string;
-    makerAsset: string;
-    takerAsset: string;
-    makerAssetData: string;
-    takerAssetData: string;
-    getMakerAmount: string;
-    getTakerAmount: string;
-    predicate: string;
-    signer: string;
-    sigType: SignatureType;
-}
-
-export type MarketOrderSignature = string;
-
-export type MarketOrderHash = string;
-
-export interface MarketOrderData {
-    exchangeAddress: string;
-    makerAddress: string;
-    takerAddress?: string; // Optional, by default = ZERO_ADDRESS
-    makerAssetAddress: string;
-    makerAssetID?: string;
-    takerAssetAddress: string;
-    takerAssetID?: string;
-    makerAmount: string;
-    signer?: string;
-    sigType?: SignatureType;
-}
-
-export interface MarketOrder extends EIP712Object {
-    salt: string;
+export interface OrderData {
+    /**
+     * Maker of the order, i.e the source of funds for the order
+     */
     maker: string;
-    makerAsset: string;
+
+    /**
+     * Address of the order taker. The zero address is used to indicate a public order
+     */
+    taker: string;
+
+    /**
+     * Token Id of the CTF ERC1155 asset to be bought or sold.
+     * If BUY, this is the tokenId of the asset to be bought, i.e the makerAssetId
+     * If SELL, this is the tokenId of the asset to be sold, i.e the  takerAssetId
+     */
+    tokenId: string;
+
+    /**
+     * Maker amount, i.e the max amount of tokens to be sold
+     */
     makerAmount: string;
-    makerAssetID: string;
-    takerAsset: string;
-    takerAssetID: string;
-    signer: string;
-    sigType: SignatureType;
+
+    /**
+     * Taker amount, i.e the minimum amount of tokens to be received
+     */
+    takerAmount: string;
+
+    /**
+     * The side of the order, BUY or SELL
+     */
+    side: Side;
+
+    /**
+     * Fee rate, in basis points, charged to the order maker, charged on proceeds
+     */
+    feeRateBps: string;
+
+    /**
+     * Nonce used for onchain cancellations
+     */
+    nonce: string;
+
+    /**
+     * Signer of the order. Optional, if it is not present the signer is the maker of the order.
+     */
+    signer?: string;
+
+    /**
+     * Timestamp after which the order is expired.
+     * Optional, if it is not present the value is '0' (no expiration)
+     */
+    expiration?: string;
+
+    /**
+     * Signature type used by the Order. Default value 'EOA'
+     */
+    signatureType?: SignatureType;
 }
 
-export type OrderType = string;
+export interface Order extends EIP712Object {
+    /**
+     *  Unique salt to ensure entropy
+     */
+    readonly salt: string;
 
-// Standard LimitOrder object to be used as the entry point in the CLOB
-export interface LimitOrderAndSignature {
-    order: LimitOrder;
-    signature: LimitOrderSignature;
-    orderType: OrderType;
+    /**
+     * Maker of the order, i.e the source of funds for the order
+     */
+    readonly maker: string;
+
+    /**
+     * Signer of the order
+     */
+    readonly signer: string;
+
+    /**
+     * Address of the order taker. The zero address is used to indicate a public order
+     */
+    readonly taker: string;
+
+    /**
+     * Token Id of the CTF ERC1155 asset to be bought or sold.
+     * If BUY, this is the tokenId of the asset to be bought, i.e the makerAssetId
+     * If SELL, this is the tokenId of the asset to be sold, i.e the  takerAssetId
+     */
+    readonly tokenId: string;
+
+    /**
+     * Maker amount, i.e the max amount of tokens to be sold
+     */
+    readonly makerAmount: string;
+
+    /**
+     * Taker amount, i.e the minimum amount of tokens to be received
+     */
+    readonly takerAmount: string;
+
+    /**
+     * Timestamp after which the order is expired
+     */
+    readonly expiration: string;
+
+    /**
+     * Nonce used for onchain cancellations
+     */
+    readonly nonce: string;
+
+    /**
+     * Fee rate, in basis points, charged to the order maker, charged on proceeds
+     */
+    readonly feeRateBps: string;
+
+    /**
+     * The side of the order, BUY or SELL
+     */
+    readonly side: Side;
+
+    /**
+     * Signature type used by the Order
+     */
+    readonly signatureType: SignatureType;
 }
 
-export type TimeInForce = 'FOK' | 'IOC';
-
-// Standard MarketOrder object to be used as entry points for Market orders in the CLOB
-export interface MarketOrderAndSignature {
-    order: MarketOrder;
-    signature: MarketOrderSignature;
-    orderType: OrderType;
-    minAmountReceived?: string; // Optional slippage protection field
-    // Optional market order type: FOK (fill or kill) / IOC (immediate or cancel)
-    timeInForce?: TimeInForce;
-}
-
-export enum LimitOrderProtocolMethods {
-    getMakerAmount = 'getMakerAmount',
-    getTakerAmount = 'getTakerAmount',
-    fillOrder = 'fillOrder',
-    cancelOrder = 'cancelOrder',
-    nonce = 'nonce',
-    advanceNonce = 'advanceNonce',
-    increaseNonce = 'increaseNonce',
-    and = 'and',
-    or = 'or',
-    eq = 'eq',
-    lt = 'lt',
-    gt = 'gt',
-    timestampBelow = 'timestampBelow',
-    nonceEquals = 'nonceEquals',
-    remaining = 'remaining',
-    transferFrom = 'transferFrom',
-    checkPredicate = 'checkPredicate',
-    remainingsRaw = 'remainingsRaw',
-    domainSeparator = 'domainSeparator',
-    batchFillOrders = 'batchFillOrders',
+export interface SignedOrder extends Order {
+    /**
+     * The order signature
+     */
+    readonly signature: OrderSignature;
 }
