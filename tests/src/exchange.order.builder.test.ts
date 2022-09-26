@@ -145,7 +145,7 @@ describe('exchange order builder', () => {
                     version: '1',
                     chainId: 80001,
                     verifyingContract:
-                        '0xfffd6f0dB1ec30A58884B23546B4F1bB333f818f',
+                        '0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E',
                 },
                 message: {
                     salt: orderTypedData.message.salt,
@@ -217,7 +217,7 @@ describe('exchange order builder', () => {
                     version: '1',
                     chainId: 80001,
                     verifyingContract:
-                        '0xfffd6f0dB1ec30A58884B23546B4F1bB333f818f',
+                        '0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E',
                 },
                 message: {
                     salt: '479249096354',
@@ -296,7 +296,7 @@ describe('exchange order builder', () => {
             expect(orderSignature).not.empty;
 
             expect(orderSignature).deep.equal(
-                '0x748008725feeb87db204b2b237869f09176a756abfcb03f9b66e833e80effbcf22c1564cbf18bf8daa88db2ea95eeb6057938bf6bdee7e3708655aa34842db3d1c'
+                '0x3874d2cfe79c0e82577f4f76ec58d950522ee5923a6f08441927d382c8178a5a2190fd4d5c49705e94d75999a58ec843f94a432e87ebc15cdb2186d315b3cc201b'
             );
         });
     });
@@ -358,7 +358,7 @@ describe('exchange order builder', () => {
             expect(orderHash).not.undefined;
 
             expect(orderHash).deep.equal(
-                '0x41ae598a16959ad2f14e9a610f7861948ad502479ca7a49d1c744de310f7be88'
+                '0xbf58957703791db2ab057528d03d1cff5375d9a475b14a9073bb7d892398dc96'
             );
         });
     });
@@ -427,7 +427,7 @@ describe('exchange order builder', () => {
                 feeRateBps: '100',
                 signatureType: 0,
                 signature:
-                    '0x748008725feeb87db204b2b237869f09176a756abfcb03f9b66e833e80effbcf22c1564cbf18bf8daa88db2ea95eeb6057938bf6bdee7e3708655aa34842db3d1c',
+                    '0x3874d2cfe79c0e82577f4f76ec58d950522ee5923a6f08441927d382c8178a5a2190fd4d5c49705e94d75999a58ec843f94a432e87ebc15cdb2186d315b3cc201b',
             });
         });
     });
