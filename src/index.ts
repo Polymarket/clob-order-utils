@@ -6,5 +6,3 @@ export * from './model/eip712.model';
 export * from './model/order.model';
 export * from './model/order-side.model';
 export * from './model/signature-types.model';
-
-export * from './networks';
