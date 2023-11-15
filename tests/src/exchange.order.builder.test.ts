@@ -1,6 +1,5 @@
 import { expect } from 'chai';
 import { Wallet } from '@ethersproject/wallet';
-import { getContracts } from '../../src/networks';
 import { ExchangeOrderBuilder } from '../../src/exchange.order.builder';
 import { generateOrderSalt } from '../../src/utils';
 import { Order, OrderData } from '../../src/model/order.model';
@@ -12,7 +11,9 @@ describe('exchange order builder', () => {
 
     beforeEach(async () => {
         const chainId = 80001;
-        const contracts = getContracts(chainId);
+
+        // exchange address
+        const exchangeAddress = '0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E';
 
         // publicly known private key
         const privateKey =
@@ -20,7 +21,7 @@ describe('exchange order builder', () => {
         wallet = new Wallet(privateKey);
 
         exchangeOrderBuilder = new ExchangeOrderBuilder(
-            contracts.Exchange,
+            exchangeAddress,
             chainId,
             wallet,
             generateOrderSalt
@@ -296,6 +297,7 @@ describe('exchange order builder', () => {
             expect(orderSignature).not.empty;
 
             expect(orderSignature).deep.equal(
+                // eslint-disable-next-line max-len
                 '0x3874d2cfe79c0e82577f4f76ec58d950522ee5923a6f08441927d382c8178a5a2190fd4d5c49705e94d75999a58ec843f94a432e87ebc15cdb2186d315b3cc201b'
             );
         });
@@ -427,6 +429,7 @@ describe('exchange order builder', () => {
                 feeRateBps: '100',
                 signatureType: 0,
                 signature:
+                    // eslint-disable-next-line max-len
                     '0x3874d2cfe79c0e82577f4f76ec58d950522ee5923a6f08441927d382c8178a5a2190fd4d5c49705e94d75999a58ec843f94a432e87ebc15cdb2186d315b3cc201b',
             });
         });
