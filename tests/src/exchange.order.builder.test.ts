@@ -11,11 +11,11 @@ describe('order builder', () => {
         let exchangeOrderBuilder: ExchangeOrderBuilder;
 
         beforeEach(async () => {
-            const chainId = 80001;
+            const chainId = 80002;
 
             // exchange address
             const exchangeAddress =
-                '0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E';
+                '0xdFE02Eb6733538f8Ea35D585af8DE5958AD99E40';
 
             // publicly known private key
             const privateKey =
@@ -146,9 +146,9 @@ describe('order builder', () => {
                     domain: {
                         name: 'Polymarket CTF Exchange',
                         version: '1',
-                        chainId: 80001,
+                        chainId: 80002,
                         verifyingContract:
-                            '0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E',
+                            '0xdFE02Eb6733538f8Ea35D585af8DE5958AD99E40',
                     },
                     message: {
                         salt: orderTypedData.message.salt,
@@ -218,9 +218,9 @@ describe('order builder', () => {
                     domain: {
                         name: 'Polymarket CTF Exchange',
                         version: '1',
-                        chainId: 80001,
+                        chainId: 80002,
                         verifyingContract:
-                            '0x4bFb41d5B3570DeFd03C39a9A4D8dE6Bd8B8982E',
+                            '0xdFE02Eb6733538f8Ea35D585af8DE5958AD99E40',
                     },
                     message: {
                         salt: '479249096354',
@@ -304,7 +304,7 @@ describe('order builder', () => {
 
                 expect(orderSignature).deep.equal(
                     // eslint-disable-next-line max-len
-                    '0x3874d2cfe79c0e82577f4f76ec58d950522ee5923a6f08441927d382c8178a5a2190fd4d5c49705e94d75999a58ec843f94a432e87ebc15cdb2186d315b3cc201b'
+                    '0x302cd9abd0b5fcaa202a344437ec0b6660da984e24ae9ad915a592a90facf5a51bb8a873cd8d270f070217fea1986531d5eec66f1162a81f66e026db653bf7ce1c'
                 );
             });
         });
@@ -366,7 +366,7 @@ describe('order builder', () => {
                 expect(orderHash).not.undefined;
 
                 expect(orderHash).deep.equal(
-                    '0xbf58957703791db2ab057528d03d1cff5375d9a475b14a9073bb7d892398dc96'
+                    '0x02ca1d1aa31103804173ad1acd70066cb6c1258a4be6dada055111f9a7ea4e55'
                 );
             });
         });
@@ -440,7 +440,7 @@ describe('order builder', () => {
                     signatureType: 0,
                     signature:
                         // eslint-disable-next-line max-len
-                        '0x3874d2cfe79c0e82577f4f76ec58d950522ee5923a6f08441927d382c8178a5a2190fd4d5c49705e94d75999a58ec843f94a432e87ebc15cdb2186d315b3cc201b',
+                        '0x302cd9abd0b5fcaa202a344437ec0b6660da984e24ae9ad915a592a90facf5a51bb8a873cd8d270f070217fea1986531d5eec66f1162a81f66e026db653bf7ce1c',
                 });
             });
         });
@@ -451,7 +451,7 @@ describe('order builder', () => {
         let exchangeOrderBuilder: ExchangeOrderBuilder;
 
         beforeEach(async () => {
-            const chainId = 80001;
+            const chainId = 80002;
 
             // exchange address
             const negRiskExchangeAddress =
@@ -586,7 +586,7 @@ describe('order builder', () => {
                     domain: {
                         name: 'Polymarket CTF Exchange',
                         version: '1',
-                        chainId: 80001,
+                        chainId: 80002,
                         verifyingContract:
                             '0xC5d563A36AE78145C45a50134d48A1215220f80a',
                     },
@@ -658,7 +658,7 @@ describe('order builder', () => {
                     domain: {
                         name: 'Polymarket CTF Exchange',
                         version: '1',
-                        chainId: 80001,
+                        chainId: 80002,
                         verifyingContract:
                             '0xC5d563A36AE78145C45a50134d48A1215220f80a',
                     },
@@ -744,7 +744,7 @@ describe('order builder', () => {
 
                 expect(orderSignature).deep.equal(
                     // eslint-disable-next-line max-len
-                    '0x92bb74d70a3c82cff3a9ccf10c9c547bb4ec71cff8cbb6cb308ca975162df7ba65837d5b57f50568fbd6bba9f2b919089268ace609cc33935b0bb5483e1092c31c'
+                    '0x1b3646ef347e5bd144c65bd3357ba19c12c12abaeedae733cf8579bc51a2752c0454c3bc6b236957e393637982c769b8dc0706c0f5c399983d933850afd1cbcd1c'
                 );
             });
         });
@@ -806,7 +806,7 @@ describe('order builder', () => {
                 expect(orderHash).not.undefined;
 
                 expect(orderHash).deep.equal(
-                    '0xdcf7c472379a0d50cff6cb72ac72bb4d42b20b9fa4ed56dd01b9f0398d17e773'
+                    '0xf15790d3edc4b5aed427b0b543a9206fcf4b1a13dfed016d33bfb313076263b8'
                 );
             });
         });
@@ -880,7 +880,7 @@ describe('order builder', () => {
                     signatureType: 0,
                     signature:
                         // eslint-disable-next-line max-len
-                        '0x92bb74d70a3c82cff3a9ccf10c9c547bb4ec71cff8cbb6cb308ca975162df7ba65837d5b57f50568fbd6bba9f2b919089268ace609cc33935b0bb5483e1092c31c',
+                        '0x1b3646ef347e5bd144c65bd3357ba19c12c12abaeedae733cf8579bc51a2752c0454c3bc6b236957e393637982c769b8dc0706c0f5c399983d933850afd1cbcd1c',
                 });
             });
         });
