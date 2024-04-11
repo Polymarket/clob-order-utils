@@ -1,6 +1,6 @@
 {
   "name": "@polymarket/order-utils",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Typescript utility for creating orders for Polymarket's CLOB",
   "author": "Liam Kovatch <liam@polymarket.com>",
   "homepage": "https://github.com/Polymarket/clob-order-utils",
