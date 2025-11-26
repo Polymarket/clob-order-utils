@@ -1,5 +1,5 @@
-import { AbiItem } from './model/abi.model';
-import ExchangeABISource from './abi/Exchange.json';
+import { AbiItem } from './model/abi.model.js';
+import ExchangeABISource from './abi/Exchange.json' with { type: 'json' };
 
 // Contract's constants.
 export const PROTOCOL_NAME = 'Polymarket CTF Exchange';
