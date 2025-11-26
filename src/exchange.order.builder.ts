@@ -1,8 +1,3 @@
-import {
-    SignTypedDataVersion,
-    TypedDataUtils,
-} from '@metamask/eth-sig-util';
-import type { TypedMessage } from '@metamask/eth-sig-util';
 import type { JsonRpcSigner } from '@ethersproject/providers';
 import type { Wallet } from '@ethersproject/wallet';
 import {
@@ -12,7 +7,8 @@ import {
     PROTOCOL_VERSION,
     ZX,
 } from './exchange.order.const.ts';
-import type { EIP712TypedData, MessageTypes } from './model/eip712.model.ts';
+import type { EIP712TypedData } from './model/eip712.model.ts';
+import { hashTypedData } from 'viem';
 import type {
     Order,
     OrderData,
@@ -154,14 +150,7 @@ export class ExchangeOrderBuilder {
      * @returns a OrderHash that is an string
      */
     buildOrderHash(orderTypedData: EIP712TypedData): OrderHash {
-        const message = orderTypedData as unknown as TypedMessage<MessageTypes>;
-
-        return (
-            ZX +
-            TypedDataUtils.eip712Hash(
-                message,
-                SignTypedDataVersion.V4
-            ).toString('hex')
-        );
+        const digest = hashTypedData(orderTypedData);
+        return (ZX + digest.replace(/^0x/, ''));
     }
 }
