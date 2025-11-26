@@ -1,4 +1,4 @@
-import { generateOrderSalt } from '../../src/utils';
+import { generateOrderSalt } from '../../src/utils.ts';
 import { expect } from 'chai';
 
 describe('generateOrderSalt', () => {

@@ -1,10 +1,10 @@
 import {
     SignTypedDataVersion,
     TypedDataUtils,
-    TypedMessage,
 } from '@metamask/eth-sig-util';
-import { JsonRpcSigner } from '@ethersproject/providers';
-import { Wallet } from '@ethersproject/wallet';
+import type { TypedMessage } from '@metamask/eth-sig-util';
+import type { JsonRpcSigner } from '@ethersproject/providers';
+import type { Wallet } from '@ethersproject/wallet';
 import {
     EIP712_DOMAIN,
     ORDER_STRUCTURE,
@@ -12,8 +12,8 @@ import {
     PROTOCOL_VERSION,
     ZX,
 } from './exchange.order.const.ts';
-import { EIP712TypedData, MessageTypes } from './model/eip712.model.ts';
-import {
+import type { EIP712TypedData, MessageTypes } from './model/eip712.model.ts';
+import type {
     Order,
     OrderData,
     OrderHash,

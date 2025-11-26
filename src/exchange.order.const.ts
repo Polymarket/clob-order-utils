@@ -1,4 +1,4 @@
-import { AbiItem } from './model/abi.model.ts';
+import type { AbiItem } from './model/abi.model.ts';
 import ExchangeABISource from './abi/Exchange.json' with { type: 'json' };
 
 // Contract's constants.
