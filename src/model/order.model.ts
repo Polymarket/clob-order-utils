@@ -1,6 +1,6 @@
-import { EIP712Object } from './eip712.model.js';
-import { Side } from './order-side.model.js';
-import { SignatureType } from './signature-types.model.js';
+import { EIP712Object } from './eip712.model.ts';
+import { Side } from './order-side.model.ts';
+import { SignatureType } from './signature-types.model.ts';
 
 export type OrderSignature = string;
 

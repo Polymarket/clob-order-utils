@@ -1,8 +1,8 @@
-export * from './exchange.order.builder.js';
-export * from './exchange.order.const.js';
+export * from './exchange.order.builder.ts';
+export * from './exchange.order.const.ts';
 
-export * from './model/abi.model.js';
-export * from './model/eip712.model.js';
-export * from './model/order.model.js';
-export * from './model/order-side.model.js';
-export * from './model/signature-types.model.js';
+export * from './model/abi.model.ts';
+export * from './model/eip712.model.ts';
+export * from './model/order.model.ts';
+export * from './model/order-side.model.ts';
+export * from './model/signature-types.model.ts';

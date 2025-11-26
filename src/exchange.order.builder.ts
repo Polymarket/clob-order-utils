@@ -11,17 +11,17 @@ import {
     PROTOCOL_NAME,
     PROTOCOL_VERSION,
     ZX,
-} from './exchange.order.const.js';
-import { EIP712TypedData, MessageTypes } from './model/eip712.model.js';
+} from './exchange.order.const.ts';
+import { EIP712TypedData, MessageTypes } from './model/eip712.model.ts';
 import {
     Order,
     OrderData,
     OrderHash,
     OrderSignature,
     SignedOrder,
-} from './model/order.model.js';
-import { SignatureType } from './model/signature-types.model.js';
-import { generateOrderSalt } from './utils.js';
+} from './model/order.model.ts';
+import { SignatureType } from './model/signature-types.model.ts';
+import { generateOrderSalt } from './utils.ts';
 
 export class ExchangeOrderBuilder {
     constructor(
