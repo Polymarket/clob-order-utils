@@ -39,7 +39,8 @@
     "build": "make build",
     "test": "make test",
     "lint": "make lint",
-    "postbuild": "cp package.json dist && cp README.md dist"
+    "postbuild": "cp package.json dist && cp README.md dist",
+    "prepublishOnly": "make build"
   },
   "dependencies": {
     "@ethersproject/providers": "^5.7.2",
