@@ -151,6 +151,6 @@ export class ExchangeOrderBuilder {
      */
     buildOrderHash(orderTypedData: EIP712TypedData): OrderHash {
         const digest = hashTypedData(orderTypedData);
-        return (ZX + digest.replace(/^0x/, ''));
+        return digest;
     }
 }
