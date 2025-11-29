@@ -5,7 +5,6 @@ import {
     ORDER_STRUCTURE,
     PROTOCOL_NAME,
     PROTOCOL_VERSION,
-    ZX,
 } from './exchange.order.const.ts';
 import type { EIP712TypedData } from './model/eip712.model.ts';
 import { hashTypedData } from 'viem';
