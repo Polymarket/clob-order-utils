@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import { Wallet } from '@ethersproject/wallet';
-import { ExchangeOrderBuilder } from '../../src/exchange.order.builder';
-import { generateOrderSalt } from '../../src/utils';
-import { Order, OrderData } from '../../src/model/order.model';
-import { Side } from '../../src/model/order-side.model';
+import { ExchangeOrderBuilder } from '../../src/exchange.order.builder.ts';
+import { generateOrderSalt } from '../../src/utils.ts';
+import type { Order, OrderData } from '../../src/model/order.model.ts';
+import { Side } from '../../src/model/order-side.model.ts';
 
 describe('order builder', () => {
     describe('CTFexchange', () => {

@@ -1,27 +1,22 @@
-import {
-    SignTypedDataVersion,
-    TypedDataUtils,
-    TypedMessage,
-} from '@metamask/eth-sig-util';
-import { JsonRpcSigner } from '@ethersproject/providers';
-import { Wallet } from '@ethersproject/wallet';
+import type { JsonRpcSigner } from '@ethersproject/providers';
+import type { Wallet } from '@ethersproject/wallet';
 import {
     EIP712_DOMAIN,
     ORDER_STRUCTURE,
     PROTOCOL_NAME,
     PROTOCOL_VERSION,
-    ZX,
-} from './exchange.order.const';
-import { EIP712TypedData, MessageTypes } from './model/eip712.model';
-import {
+} from './exchange.order.const.ts';
+import type { EIP712TypedData } from './model/eip712.model.ts';
+import { hashTypedData } from 'viem';
+import type {
     Order,
     OrderData,
     OrderHash,
     OrderSignature,
     SignedOrder,
-} from './model/order.model';
-import { SignatureType } from './model/signature-types.model';
-import { generateOrderSalt } from './utils';
+} from './model/order.model.ts';
+import { SignatureType } from './model/signature-types.model.ts';
+import { generateOrderSalt } from './utils.ts';
 
 export class ExchangeOrderBuilder {
     constructor(
@@ -154,14 +149,7 @@ export class ExchangeOrderBuilder {
      * @returns a OrderHash that is an string
      */
     buildOrderHash(orderTypedData: EIP712TypedData): OrderHash {
-        const message = orderTypedData as unknown as TypedMessage<MessageTypes>;
-
-        return (
-            ZX +
-            TypedDataUtils.eip712Hash(
-                message,
-                SignTypedDataVersion.V4
-            ).toString('hex')
-        );
+        const digest = hashTypedData(orderTypedData);
+        return digest;
     }
 }
