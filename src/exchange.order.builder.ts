@@ -7,7 +7,7 @@ import {
     PROTOCOL_VERSION,
 } from './exchange.order.const.ts';
 import type { EIP712TypedData } from './model/eip712.model.ts';
-import { hashTypedData } from 'viem';
+import { hashTypedData, type WalletClient } from 'viem';
 import type {
     Order,
     OrderData,
@@ -18,13 +18,57 @@ import type {
 import { SignatureType } from './model/signature-types.model.ts';
 import { generateOrderSalt } from './utils.ts';
 
+type ExchangeSignerInput = Wallet | JsonRpcSigner | WalletClient;
+
+interface IExchangeSigner {
+    getAddress(): Promise<string>;
+    signTypedData(
+        domain: EIP712TypedData['domain'],
+        types: EIP712TypedData['types'],
+        value: EIP712TypedData['message'],
+        primaryType?: string
+    ): Promise<OrderSignature>;
+}
+
+function createExchangeSigner(signer: ExchangeSignerInput): IExchangeSigner {
+    if ('_signTypedData' in signer) {
+        return {
+            getAddress: async () => signer.getAddress(),
+            signTypedData: async (domain, types, value) =>
+                signer._signTypedData(domain, types, value),
+        };
+    }
+
+    if (!signer.account) {
+        throw new Error('walletClient.account is required');
+    }
+
+    const account = signer.account;
+
+    return {
+        getAddress: async () => account.address,
+        signTypedData: async (domain, types, value, primaryType) =>
+            signer.signTypedData({
+                account,
+                domain,
+                types,
+                primaryType: primaryType ?? 'Order',
+                message: value,
+            }),
+    };
+}
+
 export class ExchangeOrderBuilder {
+    private readonly exchangeSigner: IExchangeSigner;
+
     constructor(
         private readonly contractAddress: string,
         private readonly chainId: number,
-        private readonly signer: Wallet | JsonRpcSigner,
+        signer: ExchangeSignerInput,
         private readonly generateSalt = generateOrderSalt
-    ) {}
+    ) {
+        this.exchangeSigner = createExchangeSigner(signer);
+    }
 
     /**
      * build an order object including the signature.
@@ -64,7 +108,7 @@ export class ExchangeOrderBuilder {
             signer = maker;
         }
 
-        const signerAddress = await this.signer.getAddress();
+        const signerAddress = await this.exchangeSigner.getAddress();
         if (signer !== signerAddress) {
             throw new Error('signer does not match');
         }
@@ -136,10 +180,11 @@ export class ExchangeOrderBuilder {
      */
     buildOrderSignature(typedData: EIP712TypedData): Promise<OrderSignature> {
         delete typedData.types.EIP712Domain;
-        return this.signer._signTypedData(
+        return this.exchangeSigner.signTypedData(
             typedData.domain,
             typedData.types,
-            typedData.message
+            typedData.message,
+            typedData.primaryType
         );
     }
 

@@ -1,5 +1,7 @@
 import { expect } from 'chai';
 import { Wallet } from '@ethersproject/wallet';
+import { createWalletClient, http } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
 import { ExchangeOrderBuilder } from '../../src/exchange.order.builder.ts';
 import { generateOrderSalt } from '../../src/utils.ts';
 import type { Order, OrderData } from '../../src/model/order.model.ts';
@@ -883,6 +885,90 @@ describe('order builder', () => {
                         '0x1b3646ef347e5bd144c65bd3357ba19c12c12abaeedae733cf8579bc51a2752c0454c3bc6b236957e393637982c769b8dc0706c0f5c399983d933850afd1cbcd1c',
                 });
             });
+        });
+    });
+
+    describe('WalletClient signer support', () => {
+        const chainId = 80002;
+        const exchangeAddress = '0xdFE02Eb6733538f8Ea35D585af8DE5958AD99E40';
+        const privateKey =
+            '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
+
+        it('buildOrder uses walletClient account address', async () => {
+            const account = privateKeyToAccount(privateKey);
+            const walletClient = createWalletClient({
+                account,
+                transport: http('http://127.0.0.1:8545'),
+            });
+
+            const builder = new ExchangeOrderBuilder(
+                exchangeAddress,
+                chainId,
+                walletClient,
+                generateOrderSalt
+            );
+
+            const order = await builder.buildOrder({
+                maker: account.address,
+                taker: '0x0000000000000000000000000000000000000000',
+                tokenId: '1234',
+                makerAmount: '100000000',
+                takerAmount: '50000000',
+                side: Side.BUY,
+                feeRateBps: '100',
+                nonce: '0',
+            } as OrderData);
+
+            expect(order.signer).equal(account.address);
+        });
+
+        it('buildOrderSignature signs with walletClient', async () => {
+            const account = privateKeyToAccount(privateKey);
+            const walletClient = createWalletClient({
+                account,
+                transport: http('http://127.0.0.1:8545'),
+            });
+
+            const builder = new ExchangeOrderBuilder(
+                exchangeAddress,
+                chainId,
+                walletClient,
+                () => '479249096354'
+            );
+
+            const order = await builder.buildOrder({
+                maker: account.address,
+                taker: '0x0000000000000000000000000000000000000000',
+                tokenId: '1234',
+                makerAmount: '100000000',
+                takerAmount: '50000000',
+                side: Side.BUY,
+                feeRateBps: '100',
+                nonce: '0',
+            } as OrderData);
+
+            const orderTypedData = builder.buildOrderTypedData(order);
+            const signature = await builder.buildOrderSignature(orderTypedData);
+
+            expect(signature).equal(
+                // eslint-disable-next-line max-len
+                '0x302cd9abd0b5fcaa202a344437ec0b6660da984e24ae9ad915a592a90facf5a51bb8a873cd8d270f070217fea1986531d5eec66f1162a81f66e026db653bf7ce1c'
+            );
+        });
+
+        it('throws if walletClient.account is missing', () => {
+            const walletClient = createWalletClient({
+                transport: http('http://127.0.0.1:8545'),
+            });
+
+            expect(() => {
+                new ExchangeOrderBuilder(
+                    exchangeAddress,
+                    chainId,
+                    walletClient,
+                    generateOrderSalt
+                );
+            }).to.throw('walletClient.account is required');
         });
     });
 });
