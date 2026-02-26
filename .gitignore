@@ -18,8 +18,6 @@ typechain/
 *.tsbuildinfo
 coverage.json
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 .DS_Store
 package-lock.json
 *.swp

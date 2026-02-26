@@ -8,4 +8,4 @@ Typescript utilities used to generate and sign orders from Polymarket's Exchange
 
 ### Installation
 
-`yarn add @polymarket/order-utils`
+`pnpm add @polymarket/order-utils`

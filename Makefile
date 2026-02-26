@@ -6,12 +6,11 @@ build:
 
 .PHONY: test
 test:
-	NODE_OPTIONS="--experimental-transform-types" yarn nyc -a \
+	NODE_OPTIONS="--experimental-transform-types" pnpm nyc -a \
 		--reporter=html \
 		--reporter=text mocha './tests' \
 		--require jsdom-global/register \
 		'tests/**/*.test.ts' \
-		--require tsconfig-paths/register \
 		--timeout 10000 \
 		--exit
 
