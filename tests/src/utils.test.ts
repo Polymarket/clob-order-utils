@@ -42,4 +42,19 @@ describe('generateOrderSalt', () => {
             expect(BigInt(generateOrderSalt()) <= max).to.be.true;
         }
     });
+
+    it('does not call Math.random — regression for #22', () => {
+        const originalRandom = Math.random;
+        Math.random = () => {
+            throw new Error('SHOULD_NOT_BE_CALLED');
+        };
+        try {
+            // Pre-fix implementation reads Math.random and would bubble the throw.
+            // Post-fix implementation uses globalThis.crypto.getRandomValues
+            // and must complete without touching Math.random.
+            expect(() => generateOrderSalt()).to.not.throw();
+        } finally {
+            Math.random = originalRandom;
+        }
+    });
 });
